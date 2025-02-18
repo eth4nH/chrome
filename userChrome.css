@@ -1,0 +1,103 @@
+:root {
+  --tab-min-height: 28px !important;
+  --tab-border-radius: 8px !important;
+  --toolbarbutton-border-radius: var(--tab-border-radius) !important;
+}
+
+.tab-close-button {
+  height: 20px !important;
+  width: 20px !important;
+  padding: 4px !important;
+  border-radius: 6px !important;
+  &:hover {
+    background-color: red !important;
+  }
+}
+
+.toolbarbutton-1 {
+  --toolbarbutton-margin: 2px;
+
+  > .toolbarbutton-icon, .toolbarbutton-badge-stack {
+    height: calc(var(--tab-min-height) - 2*var(--toolbarbutton-margin)) !important;
+    width: calc(var(--tab-min-height) - 2*var(--toolbarbutton-margin)) !important;
+    padding: calc((var(--tab-min-height) - 16px) / 2 - var(--toolbarbutton-margin)) !important;
+    margin: var(--toolbarbutton-margin) 0px;
+  }
+}
+  
+#navigator-toolbox {
+  border-bottom: none !important;
+}
+
+#TabsToolbar-customization-target, #TabsToolbar {
+  max-height: 28px !important;
+}
+
+#TabsToolbar {
+  margin-block: 1px -1px;
+}
+
+#tabbrowser-tabs {
+  min-height: 0 !important;
+}
+.tab-background {
+  min-height: 0 !important;
+  margin-block: 1px !important;
+  z-index: -1 !important;
+  > * {
+    z-index: 1 !important;
+  }
+}
+.tabbrowser-tab[class^='identity-color'] {
+  .tab-label {
+    color: color-mix(in srgb, light-dark(dimgray, white), var(--identity-tab-color));
+  }
+  .tab-context-line {
+    margin-top: 0px !important;
+    margin-inline: 8px !important;
+  }
+  &[selected] .tab-background {
+    background-color: color-mix(in srgb, light-dark(white, dimgray), var(--identity-tab-color) 25%) !important;
+  }
+}
+tab-group > .tabbrowser-tab .tab-group-line {
+  margin-bottom: 0px !important;
+}
+.tab-group-label-container {
+  margin-bottom: 1px;
+}
+
+#main-window:is([sizemode='maximized'], [sizemode='fullscreen']) {
+  #nav-bar {
+    top: -28px;
+    margin-bottom: -28px;
+    width: 30vw;
+    border-top: none !important;
+  }
+  #TabsToolbar {
+    max-height: 28px !important;
+    margin-left: 30vw;
+    margin-block: 0 !important;
+  }
+  #TabsToolbar-customization-target {
+    max-height: 28px;
+    align-self: center;
+  }
+  
+  #tabbrowser-tabs {
+    min-height: 0 !important;
+  }
+  .tab-background {
+    margin-block: 1px !important;
+    min-height: 0 !important;
+  }
+
+  
+  #urlbar-container {
+    --urlbar-container-height: 28px !important;
+    padding-block: 0 !important;
+  }
+  #nav-bar:has(#urlbar[focused]:is([usertyping], [pageproxystate='valid'])) {
+    width: calc(100% - 138px) !important;
+  }
+}
