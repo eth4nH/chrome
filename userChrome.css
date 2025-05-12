@@ -68,102 +68,144 @@ tab-group > .tabbrowser-tab .tab-group-line {
 
 #main-window {
   background-color: transparent !important;
-  
-  #navigator-toolbox {
-    z-index: 3 !important;
-    background-color: transparent !important;
-  }
-  #nav-bar {
-    top: calc(-1*var(--navigator-toolbox-height));
-    margin-bottom: calc(-1*var(--navigator-toolbox-height));
-    margin-right: 138px !important; /* width of .titlebar-buttonbox */
-    border-top: none !important;
-    background-color: transparent !important;
-  }
-  #TabsToolbar {
-    --tabs-drop-down-transition: 0.25s ease-in-out 0.5s;
-    
-    max-height: var(--navigator-toolbox-height) !important;
-    margin-block: 0 !important;
-    position: relative;
-    top: 0;
-    transition: top var(--tabs-drop-down-transition) !important;
-    > *:not(.titlebar-buttonbox-container) {
-      background-color: color-mix(in srgb, var(--toolbox-bgcolor) 80%, transparent) !important;
-      mask-image: linear-gradient(black 0%, black 100%);
-      mask-size: 100% var(--navigator-toolbox-height);
-      mask-position: 0% var(--navigator-toolbox-height);
-      mask-repeat: no-repeat;
-      transition: mask-position var(--tabs-drop-down-transition) !important;
-    }
-  }
-  #navigator-toolbox:hover > #TabsToolbar {
-    top: var(--navigator-toolbox-height);
-    transition-delay: 0s !important;
-    > *:not(.titlebar-buttonbox-container) {
-      mask-position: 0% 0% !important;
-      transition-delay: 0s !important;
-    }
-  }
-  #TabsToolbar-customization-target {
-    max-height: var(--navigator-toolbox-height);
-    align-self: center;
-  }
-  #TabsToolbar .titlebar-buttonbox {
-    position: fixed !important;
-    top: 0px;
-    right: 0px;
-  }
-  .titlebar-spacer[type='pre-tabs'] {
-    display: block !important;
-  }
-  
-  #tabbrowser-tabs {
-    min-height: 0 !important;
-    --tab-hover-background-color: color-mix(in srgb, currentColor 80%, transparent);
-  }
-  .tab-background {
-    margin-block: 1px !important;
-    min-height: 0 !important;
-    color: rgb(32, 32, 32);
-    &:not([selected='true']) {
-      background-color: color-mix(in srgb, var(--tab-hover-background-color) 66%, transparent);
-    }
-  }
+}
 
-  #urlbar-container {
-    --urlbar-container-height: calc(var(--navigator-toolbox-height)) !important;
+#navigator-toolbox {
+  z-index: 3 !important;
+  background-color: transparent !important;
+  border-top: 0 !important;
+}
+#nav-bar {
+  top: calc(-1*var(--navigator-toolbox-height));
+  margin-bottom: calc(-1*var(--navigator-toolbox-height));
+  margin-right: 138px !important; /* width of .titlebar-buttonbox */
+  border-top: none !important;
+  background-color: transparent !important;
+}
+#TabsToolbar {
+  --tabs-drop-down-transition: 0.25s ease-in-out 0.5s;
+
+  max-height: var(--navigator-toolbox-height) !important;
+  margin-block: 0 !important;
+  position: relative;
+  top: 0;
+  transition: top var(--tabs-drop-down-transition) !important;
+  > *:not(.titlebar-buttonbox-container) {
+    background: color-mix(in srgb, var(--toolbox-bgcolor), rgba(0, 0, 0, 0.5)) !important;
+    mask-image: linear-gradient(black 0%, black 100%);
+    mask-size: 100% var(--navigator-toolbox-height);
+    mask-position: 0% var(--navigator-toolbox-height);
+    mask-repeat: no-repeat;
+    transition: mask-position var(--tabs-drop-down-transition) !important;
   }
-  #urlbar {
-    --urlbar-min-height: calc(var(--urlbar-container-height) - 4px) !important;
-    --urlbar-height: var(--urlbar-min-height) !important;
-    
-    color-scheme: dark !important;
+}
+/* show tabs when hovering over or when a tab is loading */
+#navigator-toolbox:hover > #TabsToolbar,
+#TabsToolbar:has(.tabbrowser-tab:is([busy='true'])) {
+  top: var(--navigator-toolbox-height);
+  transition-delay: 0s !important;
+  > *:not(.titlebar-buttonbox-container) {
+    mask-position: 0% 0% !important;
+    transition-delay: 0s !important;
   }
-  #urlbar:not([open]) > #urlbar-background {
-    background-color: color-mix(in srgb, var(--toolbar-field-background-color) 25%, transparent) !important;
-    border-color: color-mix(in srgb, var(--toolbar-field-border-color) 25%, transparent) !important;
+}
+#TabsToolbar-customization-target {
+  max-height: var(--navigator-toolbox-height);
+  align-self: center;
+}
+#TabsToolbar .titlebar-buttonbox {
+  position: fixed !important;
+  top: 0px;
+  right: 0px;
+}
+/* force show titlebar spacer */
+.titlebar-spacer[type='pre-tabs'] {
+  display: block !important;
+}
+
+#tabbrowser-tabs {
+  min-height: 0 !important;
+}
+.tab-background {
+  --tab-hover-background-color: color-mix(in srgb, var(--tab-selected-bgcolor) 70%, light-dark(black, white));
+  margin-block: 1px !important;
+  min-height: 0 !important;
+
+}
+/* tab dividers */
+#tabbrowser-tabs:not([orient='vertical']) .tabbrowser-tab + .tabbrowser-tab::before {
+  content: '';
+  position: relative;
+  width: 1px;
+  height: 16px;
+  margin: 6px 1px 0 -2px;
+  background: color-mix(in srgb, currentColor 25%, transparent);
+}
+/* tab spacing */
+.tabbrowser-tab { padding-inline: 1px !important; }
+.tabbrowser-tab:nth-child(n+2) { padding-left: 1.5px !important; }
+.tabbrowser-tab:nth-last-child(n+2) { padding-right: 1.5px !important; }
+
+#urlbar-container {
+  --urlbar-container-height: calc(var(--navigator-toolbox-height)) !important;
+}
+#urlbar {
+  --urlbar-min-height: calc(var(--urlbar-container-height) - 4px) !important;
+  --urlbar-height: calc(var(--urlbar-min-height)) !important;
+  --urlbar-icon-padding: calc((var(--urlbar-min-height) - 2px - 2px - 16px) / 2) !important;
+
+  color-scheme: dark !important;
+  top: 2px;
+  transition: top var(--animation-easing-function) 150ms !important;  /* match urlbar-grow animation */
+
+  > #urlbar-background {
+    outline: none !important;
+    transition: inherit !important;
+    transition-property: filter !important;
   }
+  .urlbar-input-container image {padding: 1px !important;}
+}
+
+#urlbar[focused] {
+  --urlbar-height: calc(var(--urlbar-min-height) + 4px) !important;
   
-  /* Overrides ATBC settings */
+  margin-left: calc(-1 * var(--urlbar-margin-inline)) !important;
+  width: calc(var(--urlbar-width) + 2 * var(--urlbar-margin-inline)) !important;
+  top: 160px !important;
+  
+  > #urlbar-background {
+    filter: drop-shadow(0 5px 8px black) !important;
+  }
+  > .urlbar-input-container {
+    height: var(--urlbar-container-height) !important;
+    padding-block: calc((var(--urlbar-container-height) - var(--urlbar-min-height)) / 2 + var(--urlbar-container-padding)) !important;
+    padding-inline: calc(var(--urlbar-margin-inline) + var(--urlbar-container-padding)) !important;
+  }
+}
+#urlbar:not([focused]) > #urlbar-background {
+  background-color: color-mix(in srgb, var(--toolbar-field-background-color) 20%, transparent) !important;
+  border-color: color-mix(in srgb, var(--toolbar-field-border-color) 50%, transparent) !important;
+}
+
+/* Overrides ATBC settings */
+#nav-bar {
   --toolbarbutton-icon-fill: white !important;
   --toolbar-field-color: white !important;
-  
-  .titlebar-button {
-    color: white !important;
+}
+
+.titlebar-button {
+  color: white !important;
+}
+
+.urlbar-addon-page-action[style*=".svg"] > .urlbar-icon {
+  :root #urlbar:not([focused]) & {
+    filter: grayscale(100%) brightness(20%) invert();
   }
 
-  .urlbar-addon-page-action[style*=".svg"] > .urlbar-icon {
-    :root #urlbar:not([focused]) &,
-    :root #urlbar[focused] & {
+  /* As above, but for the default theme in dark mode, which suffers from the same issue */
+  @media (prefers-color-scheme: dark) {
+    :root:not([lwtheme]) & {
       filter: grayscale(100%) brightness(20%) invert();
-    }
-
-    /* As above, but for the default theme in dark mode, which suffers from the same issue */
-    @media (prefers-color-scheme: dark) {
-      :root:not([lwtheme]) & {
-        filter: grayscale(100%) brightness(20%) invert();
-      }
     }
   }
 }
