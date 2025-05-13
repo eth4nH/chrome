@@ -3,6 +3,7 @@
   --tab-min-height: calc(var(--navigator-toolbox-height) - 0px) !important;
   --tab-border-radius: 8px !important;
   --toolbarbutton-border-radius: var(--tab-border-radius) !important;
+  --tabstrip-min-height: 0 !important;
 }
 
 .tab-close-button {
@@ -79,17 +80,20 @@ tab-group > .tabbrowser-tab .tab-group-line {
   top: calc(-1*var(--navigator-toolbox-height));
   margin-bottom: calc(-1*var(--navigator-toolbox-height));
   margin-right: 138px !important; /* width of .titlebar-buttonbox */
-  border-top: none !important;
+  padding-bottom: 1px !important;
+  max-height: calc(var(--navigator-toolbox-height)) !important;
+  border-top-color: transparent !important; /* keep but hide border to facilitate dragging from the top */
   background-color: transparent !important;
 }
 #TabsToolbar {
   --tabs-drop-down-transition: 0.25s ease-in-out 0.5s;
 
   max-height: var(--navigator-toolbox-height) !important;
-  margin-block: 0 !important;
+  margin-block: 0 0 !important;
   position: relative;
   top: 0;
   transition: top var(--tabs-drop-down-transition) !important;
+  -moz-window-dragging: no-drag !important;
   > *:not(.titlebar-buttonbox-container) {
     background: color-mix(in srgb, var(--toolbox-bgcolor), rgba(0, 0, 0, 0.5)) !important;
     mask-image: linear-gradient(black 0%, black 100%);
@@ -113,7 +117,7 @@ tab-group > .tabbrowser-tab .tab-group-line {
   max-height: var(--navigator-toolbox-height);
   align-self: center;
 }
-#TabsToolbar .titlebar-buttonbox {
+.titlebar-buttonbox {
   position: fixed !important;
   top: 0px;
   right: 0px;
@@ -148,14 +152,14 @@ tab-group > .tabbrowser-tab .tab-group-line {
 
 #urlbar-container {
   --urlbar-container-height: calc(var(--navigator-toolbox-height)) !important;
+  padding-top: 1px !important;
 }
 #urlbar {
   --urlbar-min-height: calc(var(--urlbar-container-height) - 4px) !important;
   --urlbar-height: calc(var(--urlbar-min-height)) !important;
   --urlbar-icon-padding: calc((var(--urlbar-min-height) - 2px - 2px - 16px) / 2) !important;
 
-  color-scheme: dark !important;
-  top: 2px;
+  position: relative !important;
   transition: top var(--animation-easing-function) 150ms !important;  /* match urlbar-grow animation */
 
   > #urlbar-background {
@@ -165,8 +169,11 @@ tab-group > .tabbrowser-tab .tab-group-line {
   }
   .urlbar-input-container image {padding: 1px !important;}
 }
+#toolbar-menubar[inactive='true'] ~ #nav-bar #urlbar {
+  top: 2px !important;
+}
 
-#urlbar[focused] {
+#toolbar-menubar ~ #nav-bar #urlbar[focused] {
   --urlbar-height: calc(var(--urlbar-min-height) + 4px) !important;
   
   margin-left: calc(-1 * var(--urlbar-margin-inline)) !important;
