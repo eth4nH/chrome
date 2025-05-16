@@ -86,7 +86,7 @@ tab-group > .tabbrowser-tab .tab-group-line {
   background-color: transparent !important;
 }
 #TabsToolbar {
-  --tabs-drop-down-transition: 0.25s ease-in-out 0.5s;
+  --tabs-drop-down-transition: 0.15s ease-in-out 0.5s;
 
   max-height: var(--navigator-toolbox-height) !important;
   margin-block: 0 0 !important;
@@ -157,7 +157,6 @@ tab-group > .tabbrowser-tab .tab-group-line {
 #urlbar {
   --urlbar-min-height: calc(var(--urlbar-container-height) - 4px) !important;
   --urlbar-height: calc(var(--urlbar-min-height)) !important;
-  --urlbar-icon-padding: calc((var(--urlbar-min-height) - 2px - 2px - 16px) / 2) !important;
 
   position: relative !important;
   transition: top var(--animation-easing-function) 150ms !important;  /* match urlbar-grow animation */
@@ -167,14 +166,25 @@ tab-group > .tabbrowser-tab .tab-group-line {
     transition: inherit !important;
     transition-property: filter !important;
   }
-  .urlbar-input-container image {padding: 1px !important;}
+  
+  > .urlbar-input-container {
+    height: var(--urlbar-min-height) !important;
+    transition: inherit !important;
+    transition-property: height !important;
+    
+    box, hbox {
+      width: auto !important;
+      height: 100% !important;
+      align-items: center !important;
+    }
+  }
 }
 #toolbar-menubar[inactive='true'] ~ #nav-bar #urlbar {
   top: 2px !important;
 }
 
 #toolbar-menubar ~ #nav-bar #urlbar[focused] {
-  --urlbar-height: calc(var(--urlbar-min-height) + 4px) !important;
+  --urlbar-min-height: calc(var(--urlbar-container-height) + 16px) !important;
   
   margin-left: calc(-1 * var(--urlbar-margin-inline)) !important;
   width: calc(var(--urlbar-width) + 2 * var(--urlbar-margin-inline)) !important;
@@ -183,9 +193,9 @@ tab-group > .tabbrowser-tab .tab-group-line {
   > #urlbar-background {
     filter: drop-shadow(0 5px 8px black) !important;
   }
+  
   > .urlbar-input-container {
-    height: var(--urlbar-container-height) !important;
-    padding-block: calc((var(--urlbar-container-height) - var(--urlbar-min-height)) / 2 + var(--urlbar-container-padding)) !important;
+    padding-block: 10px !important;
     padding-inline: calc(var(--urlbar-margin-inline) + var(--urlbar-container-padding)) !important;
   }
 }
