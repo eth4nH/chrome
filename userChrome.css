@@ -105,10 +105,10 @@ tab-group > .tabbrowser-tab .tab-group-line {
     transition-delay: 150ms !important;
   } */
 }
-/* show tabs when hovering over or when a tab is loading */
+/* show nav-bar when hovering over or focused within */
 #navigator-toolbox:is(:hover, :focus-within) > #nav-bar {
   top: 0;
-  opacity: 1 !important;
+  opacity: 1;
   transition-delay: 0s !important;
   
   #urlbar {
@@ -125,6 +125,25 @@ tab-group > .tabbrowser-tab .tab-group-line {
   max-height: var(--navigator-toolbox-height);
   align-self: center;
 }
+
+/* force show nav-bar when customizing */
+#main-window[customizing] {
+  #nav-bar {
+    top: 0 !important;
+    opacity: 1 !important;
+    margin-bottom: 0 !important;
+    transition: none !important;
+    transition-delay: 0 !important;
+  }
+
+  #urlbar {
+    opacity: 1 !important;
+    margin-top: -4px !important;
+    transition: none !important;
+    transition-delay: 0 !important;
+  }
+}
+
 /*.titlebar-buttonbox {
   position: fixed !important;
   top: 0px;
