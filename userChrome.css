@@ -84,7 +84,7 @@ tab-group > .tabbrowser-tab .tab-group-line {
   padding-bottom: 1px !important;
   max-height: calc(var(--navigator-toolbox-height)) !important;
   border-top-color: transparent !important; /* keep but hide border to facilitate dragging from the top */
-  background: var(--toolbar-bgcolor) linear-gradient(black) center !important;
+  background: var(--toolbar-bgcolor) linear-gradient(rgb(32, 32, 32)) center !important;
   background-blend-mode: lighten;
   transition: 0.15s ease-in-out !important;
   transition-delay: 500ms !important;
@@ -150,10 +150,10 @@ tab-group > .tabbrowser-tab .tab-group-line {
   right: 0px;
 } */
 
-/* force show titlebar spacer */
+/* force show titlebar spacer
 .titlebar-spacer[type='pre-tabs'] {
   display: block !important;
-}
+} */
 
 #tabbrowser-tabs {
   min-height: 0 !important;
