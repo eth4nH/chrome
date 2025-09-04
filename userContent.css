@@ -1,0 +1,85 @@
+@-moz-document url(about:home), url(about:newtab), url(about:privatebrowsing) {
+    /* Reduce brightness of wallpaper */
+    #root {
+        background-color: rgb(0 0 0 / 0.25);
+    }
+
+    /* Add background blur to elements with a non-transparent background */
+    .weatherCard,
+    .top-site-outer .tile,
+    .search-handoff-button,
+    .personalize-button,
+    .ds-card-grid .sections-card-ui {
+        backdrop-filter: blur(5px);
+    }
+
+    /* Larger border radius */
+    .personalize-button {
+        border-radius: var(--border-radius-medium) !important;
+    }
+
+    /* Translucent search bar when not focused */
+    .search-wrapper:not(.fake-focus) .search-handoff-button {
+        background-color: color-mix(in srgb, var(--newtab-background-color-secondary) 80%, transparent) !important;
+    }
+
+    /* Disable extra outline */
+    .search-wrapper.fake-focus .search-handoff-button {
+        box-shadow: none !important;
+    }
+
+    /* Thicker outline, larger border radius */
+    .search-handoff-button {
+        border-width: 2px !important;
+        border-radius: var(--border-radius-large) !important;
+    }
+
+    /* Solid background for top sites when hover over */
+    .top-site-outer.active,
+    .top-site-inner:hover {
+        .top-site-button {
+            background: var(--newtab-background-color-secondary) !important;    /* match tile hover bg color */
+        }
+
+        .context-menu-button {
+            opacity: 1 !important;
+        }
+    }
+
+    /* Mostly making sure that .top-site-outer:hover has no effect */
+    .top-site-outer {
+        background: transparent !important;
+
+        .top-site-button {
+            padding: 0 !important;
+            background: transparent !important;
+            transition: background 200ms !important;    /* match context menu opacity transition */
+            border-radius: var(--border-radius-large);
+        }
+
+        .top-site-inner {
+            margin-inline: var(--space-large);
+        }
+
+        .title {
+            padding-top: var(--space-xsmall) !important;    /* shorten distance to .tile */
+        }
+
+        .tile {
+            background-color: var(--newtab-background-card) !important;
+            border-color: transparent !important;
+            box-shadow: none !important;
+            outline-color: transparent !important;  /* disable outline when clicked */
+        }
+
+        .context-menu-button {
+            opacity: 0 !important;
+            inset-block-start: 0 !important;    /* move button to top right of .top-site-button */
+            border-radius: 0 var(--border-radius-large) 0 var(--border-radius-medium) !important;   /* matches border radius to .top-site-button */
+        }
+
+        .context-menu {
+            inset-block-start: var(--space-medium) !important;  /* move menu closer to button */
+        }
+    }
+}
