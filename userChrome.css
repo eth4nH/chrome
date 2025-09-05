@@ -179,7 +179,7 @@ tab-group > .tabbrowser-tab .tab-group-line,
   transition-delay: 0s !important;
   filter: drop-shadow(0 5px 8px black) !important;
   
-  /* Give urlbar buttons the default look */
+  /* Keep urlbar buttons square */
   > .urlbar-input-container {
     padding-block: 10px !important;
     padding-inline: calc(var(--urlbar-margin-inline) + var(--urlbar-container-padding)) !important;
@@ -187,24 +187,15 @@ tab-group > .tabbrowser-tab .tab-group-line,
 }
 
 
-/* Overrides ATBC settings
-#nav-bar {
-  --toolbarbutton-icon-fill: white !important;
-  --toolbar-field-color: white !important;
+/* Overrides ATBC settings, only enable if ATBC is enabled
+#navigator-toolbox, :root {
+  background-color: transparent !important;
 }
 
-.titlebar-button {
-  color: white !important;
-}
-
-.urlbar-addon-page-action[style*=".svg"] > .urlbar-icon {
-  :root #urlbar:not([focused]) & {
-    filter: grayscale(100%) brightness(20%) invert();
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([lwtheme]) & {
-      filter: grayscale(100%) brightness(20%) invert();
-    }
+#main-window[lwt-tab-selected='light'] {
+  .titlebar-button,
+  .tabbrowser-tab:not([selected]),
+  .tab-icon-image {
+    color: var(--lwt-accent-color) !important;
   }
 } */
