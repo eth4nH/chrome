@@ -131,19 +131,24 @@ tab-group > .tabbrowser-tab .tab-group-line,
 }
 
 /* Tab dividers */
+#tabbrowser-tabs {
+  --tab-divider-height: 16px;
+  --tab-spacing: 3px;   /* make this an odd number */
+}
 #tabbrowser-tabs:not([orient='vertical']) .tabbrowser-tab + .tabbrowser-tab::before {
   content: '';
   position: relative;
   width: 1px;
-  height: 16px;
-  margin: 6px 1px 0 -2px;
+  height: var(--tab-divider-height);
+  margin-block: calc((var(--navigator-toolbox-height) - var(--tab-divider-height)) / 2);
+  margin-inline: calc(-1 * (var(--tab-spacing) / 2 + 0.5px)) calc(var(--tab-spacing) / 2 - 0.5px);
   background: color-mix(in srgb, currentColor 25%, transparent);
 }
 
 /* Shorter tab spacing (3px) */
 .tabbrowser-tab { padding-inline: 1px !important; }
-.tabbrowser-tab:nth-child(n+2) { padding-left: 1.5px !important; }
-.tabbrowser-tab:nth-last-child(n+2) { padding-right: 1.5px !important; }
+.tabbrowser-tab:nth-child(n+2) { padding-left: calc(var(--tab-spacing) / 2) !important; }
+.tabbrowser-tab:nth-last-child(n+2) { padding-right: calc(var(--tab-spacing) / 2) !important; }
 
 
 /* Fit urlbar into shorter navbar */
