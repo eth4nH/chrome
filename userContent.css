@@ -13,6 +13,13 @@
         backdrop-filter: blur(5px);
     }
 
+    /* Workaround for transparent background on buttons when using uploaded backgrounds */
+    .activity-stream[style*='--newtab-wallpaper: url(blob:null/'] *:is(.weatherInfoLink, .weatherButtonContextMenuWrapper, .personalize-button) {
+        &:not(:hover, :focus) {
+            background-color: var(--newtab-weather-background-color) !important;
+        }
+    }
+
     /* Larger border radius */
     .personalize-button {
         border-radius: var(--border-radius-medium) !important;
