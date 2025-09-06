@@ -202,6 +202,7 @@ tab-group > .tabbrowser-tab .tab-group-line,
   transition: margin-top var(--drop-down-transition);
 }
 
+
 /* Overrides ATBC settings, only enable if ATBC is enabled */
 /* #navigator-toolbox, :root {
   background-color: transparent !important;
@@ -214,3 +215,18 @@ tab-group > .tabbrowser-tab .tab-group-line,
     color: var(--lwt-accent-color) !important;
   }
 } */
+
+
+/* Smaller right click context menu padding */
+menupopup {
+  --menuitem-padding: 4px 8px !important;
+    
+  menuseparator {
+    padding: var(--menuitem-padding) !important;
+  }
+}
+
+/* Same as above for context menu nav buttons */
+#context-navigation > .menuitem-iconic > .menu-icon {
+  padding: var(--menuitem-padding) !important;
+}
