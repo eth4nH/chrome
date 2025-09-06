@@ -21,7 +21,7 @@
 }
 
 
-/* Make top bar draw on top of browser */ 
+/* Make tabs and nav bar draw on top of browser */ 
 #navigator-toolbox {
   z-index: 3 !important;
   background-color: transparent !important;
@@ -36,7 +36,7 @@
 }
 
 /* Nav bar on top of tabs by default */
-#nav-bar {
+#navigator-toolbox:not([tabs-hidden]) #nav-bar {
   top: calc(-1*var(--navigator-toolbox-height));
   margin-bottom: calc(-1*var(--navigator-toolbox-height));
   padding-bottom: 1px !important;
@@ -49,17 +49,27 @@
   transition-property: top, opacity !important;
 }
 
-
 /* Show nav-bar when hovering over or focused within */
-#navigator-toolbox:is(:hover, :focus-within) > #nav-bar {
-  top: 0;
-  opacity: 1;
-  transition-delay: 0s !important;
-  
-  #urlbar {
+#navigator-toolbox:is(:hover, :focus-within):not([tabs-hidden]) {
+  & > #nav-bar {
+    top: 0;
+    opacity: 1;
     transition-delay: 0s !important;
-    opacity: 1 !important;
+
+    #urlbar {
+      transition-delay: 0s !important;
+      opacity: 1 !important;
+    }
   }
+}   
+
+/* Move sidepanel down with navigator toolbox so it doesn't get drawn over */
+#navigator-toolbox:is(:hover, :focus-within):not([tabs-hidden]) ~ #browser > #sidebar-main {
+  margin-top: var(--navigator-toolbox-height);
+  transition-delay: 0s !important;
+}
+#sidebar-main {
+  transition: margin-top var(--drop-down-transition);
 }
 
 
@@ -82,6 +92,46 @@
 }
 
 
+
+/* Fit urlbar into shorter navbar */
+#urlbar {
+  --urlbar-height: var(--urlbar-container-height) !important;
+
+  position: relative !important;
+  transition: top var(--animation-easing-function) 150ms, /* match urlbar-grow animation */
+              filter var(--animation-easing-function) 150ms,
+              opacity var(--drop-down-transition) !important;
+  
+  > .urlbar-input-container {
+    height: var(--urlbar-height) !important;
+    transition: inherit !important;
+    transition-property: height !important;
+  }
+}
+
+#navigator-toolbox:not([tabs-hidden]) #urlbar {
+  opacity: 0 !important;
+}
+
+/* Drop down and show urlbar when focused */
+#urlbar[focused] {
+  --urlbar-height: calc(var(--urlbar-min-height) + 16px) !important;  
+  
+  margin-left: calc(-1 * var(--urlbar-margin-inline)) !important;
+  width: calc(var(--urlbar-width) + 2 * var(--urlbar-margin-inline)) !important;
+  top: 160px !important;
+  opacity: 1 !important;
+  transition-delay: 0s !important;
+  filter: drop-shadow(0 5px 8px black) !important;
+  
+  /* Keep urlbar buttons square */
+  > .urlbar-input-container {
+    padding-block: 10px !important;
+    padding-inline: calc(var(--urlbar-margin-inline) + var(--urlbar-container-padding)) !important;
+  }
+}
+
+
 /* Force show titlebar spacer */
 #TabsToolbar .titlebar-spacer[type='pre-tabs'] {
   display: block !important;
@@ -91,7 +141,7 @@
 /* Fit tabs to smaller tabs toolbar */
 .tab-background {
   margin-block: 1px !important;
-  min-height: 0 !important;
+  min-height: var(--navigator-toolbox-height) !important;
 }
 
 /* Add identity color to container tabs + context line */
@@ -130,76 +180,32 @@ tab-group > .tabbrowser-tab .tab-group-line,
   }
 }
 
-/* Tab dividers */
 #tabbrowser-tabs {
   --tab-divider-height: 16px;
   --tab-spacing: 3px;   /* make this an odd number */
 }
-#tabbrowser-tabs:not([orient='vertical']) .tabbrowser-tab + .tabbrowser-tab::before {
-  content: '';
-  position: relative;
-  width: 1px;
-  height: var(--tab-divider-height);
-  margin-block: calc((var(--navigator-toolbox-height) - var(--tab-divider-height)) / 2);
-  margin-inline: calc(-1 * (var(--tab-spacing) / 2 + 0.5px)) calc(var(--tab-spacing) / 2 - 0.5px);
-  background: color-mix(in srgb, currentColor 25%, transparent);
-}
-
-/* Shorter tab spacing (3px) */
-.tabbrowser-tab { padding-inline: 1px !important; }
-.tabbrowser-tab:nth-child(n+2) { padding-left: calc(var(--tab-spacing) / 2) !important; }
-.tabbrowser-tab:nth-last-child(n+2) { padding-right: calc(var(--tab-spacing) / 2) !important; }
-
-
-/* Fit urlbar into shorter navbar */
-#urlbar {
-  --urlbar-height: var(--urlbar-container-height) !important;
-
-  position: relative !important;
-  opacity: 0 !important;
-  transition: top var(--animation-easing-function) 150ms, /* match urlbar-grow animation */
-              filter var(--animation-easing-function) 150ms,
-              opacity var(--drop-down-transition) !important;
-  
-  > .urlbar-input-container {
-    height: var(--urlbar-height) !important;
-    transition: inherit !important;
-    transition-property: height !important;
+#tabbrowser-tabs:not([orient='vertical']) {
+  /* Tab dividers */
+  .tabbrowser-tab + .tabbrowser-tab::before {
+    content: '';
+    position: relative;
+    width: 1px;
+    height: var(--tab-divider-height);
+    margin-block: calc((var(--navigator-toolbox-height) - var(--tab-divider-height)) / 2);
+    margin-inline: calc(-1 * (var(--tab-spacing) / 2 + 0.5px)) calc(var(--tab-spacing) / 2 - 0.5px);
+    background: color-mix(in srgb, currentColor 25%, transparent);
   }
-}
 
-/* Drop down and show urlbar when focused */
-#urlbar[focused] {
-  --urlbar-height: calc(var(--urlbar-min-height) + 16px) !important;  
-  
-  margin-left: calc(-1 * var(--urlbar-margin-inline)) !important;
-  width: calc(var(--urlbar-width) + 2 * var(--urlbar-margin-inline)) !important;
-  top: 160px !important;
-  opacity: 1 !important;
-  transition-delay: 0s !important;
-  filter: drop-shadow(0 5px 8px black) !important;
-  
-  /* Keep urlbar buttons square */
-  > .urlbar-input-container {
-    padding-block: 10px !important;
-    padding-inline: calc(var(--urlbar-margin-inline) + var(--urlbar-container-padding)) !important;
-  }
+  /* Shorter tab spacing (3px) */
+  .tabbrowser-tab { padding-inline: 1px !important; }
+  .tabbrowser-tab:nth-child(n+2) { padding-left: calc(var(--tab-spacing) / 2) !important; }
+  .tabbrowser-tab:nth-last-child(n+2) { padding-right: calc(var(--tab-spacing) / 2) !important; }
 }
 
 
 /* Disable browser box shadow */
 #tabbrowser-tabbox, browser {
   box-shadow: none !important;
-}
-
-
-/* Move sidepanel down with navigator toolbox so it doesn't get drawn over */
-#navigator-toolbox:is(:hover, :focus-within) ~ #browser > #sidebar-main {
-  margin-top: var(--navigator-toolbox-height);
-  transition-delay: 0s !important;
-}
-#sidebar-main {
-  transition: margin-top var(--drop-down-transition);
 }
 
 
