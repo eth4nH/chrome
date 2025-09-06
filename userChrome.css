@@ -187,8 +187,23 @@ tab-group > .tabbrowser-tab .tab-group-line,
 }
 
 
-/* Overrides ATBC settings, only enable if ATBC is enabled
-#navigator-toolbox, :root {
+/* Disable browser box shadow */
+#tabbrowser-tabbox, browser {
+  box-shadow: none !important;
+}
+
+
+/* Move sidepanel down with navigator toolbox so it doesn't get drawn over */
+#navigator-toolbox:is(:hover, :focus-within) ~ #browser > #sidebar-main {
+  margin-top: var(--navigator-toolbox-height);
+  transition-delay: 0s !important;
+}
+#sidebar-main {
+  transition: margin-top var(--drop-down-transition);
+}
+
+/* Overrides ATBC settings, only enable if ATBC is enabled */
+/* #navigator-toolbox, :root {
   background-color: transparent !important;
 }
 
