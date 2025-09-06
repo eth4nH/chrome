@@ -92,6 +92,9 @@
 }
 
 
+#urlbar-container {
+  --urlbar-container-height: calc(var(--navigator-toolbox-height) - 2px) !important;
+}
 
 /* Fit urlbar into shorter navbar */
 #urlbar {
@@ -106,6 +109,10 @@
     height: var(--urlbar-height) !important;
     transition: inherit !important;
     transition-property: height !important;
+  }
+  
+  > #urlbar-background {
+    margin: 1px !important;
   }
 }
 
