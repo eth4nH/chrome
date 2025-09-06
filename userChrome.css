@@ -50,25 +50,24 @@
 }
 
 /* Show nav-bar when hovering over or focused within */
-#navigator-toolbox:is(:hover, :focus-within):not([tabs-hidden]) {
+#navigator-toolbox:is(:hover, :focus-within, :has(*[open], #downloads-button[notification='finish'])):not([tabs-hidden]) {
   & > #nav-bar {
     top: 0;
     opacity: 1;
     transition-delay: 0s !important;
-
-    #urlbar {
-      transition-delay: 0s !important;
-      opacity: 1 !important;
-    }
   }
-}   
 
-/* Move sidepanel down with navigator toolbox so it doesn't get drawn over */
-#navigator-toolbox:is(:hover, :focus-within):not([tabs-hidden]) ~ #browser > #sidebar-main {
-  margin-top: var(--navigator-toolbox-height);
-  transition-delay: 0s !important;
+  & #urlbar {
+    transition-delay: 0s !important;
+    opacity: 1;
+  }
+
+  /* Move sidepanel down with navigator toolbox so it doesn't get drawn over */
+  & ~ #browser > #sidebar-main {
+    margin-top: var(--navigator-toolbox-height);
+    transition-delay: 0s !important;
+  }
 }
-
 
 /* Force show nav-bar when customizing */
 #main-window[customizing] {
@@ -114,7 +113,7 @@
 }
 
 #navigator-toolbox:not([tabs-hidden]) #urlbar {
-  opacity: 0 !important;
+  opacity: 0;
 }
 
 /* Drop down and show urlbar when focused */
@@ -124,7 +123,6 @@
   margin-left: calc(-1 * var(--urlbar-margin-inline)) !important;
   width: calc(var(--urlbar-width) + 2 * var(--urlbar-margin-inline)) !important;
   top: 160px !important;
-  opacity: 1 !important;
   transition-delay: 0s !important;
   filter: drop-shadow(0 5px 8px black) !important;
   
