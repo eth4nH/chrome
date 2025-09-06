@@ -188,7 +188,8 @@ tab-group > .tabbrowser-tab .tab-group-line,
   }
   
   /* Tab dividers */
-  .tabbrowser-tab + .tabbrowser-tab::before {
+  .tabbrowser-tab:not([selected], [multiselected], :hover) + .tabbrowser-tab:not([selected], [multiselected], :hover)::before,
+  #tabbrowser-arrowscrollbox:not([overflowing]) .tabbrowser-tab:not([selected], [multiselected], :hover) + #tabbrowser-arrowscrollbox-periphery::before {
     content: '';
     position: relative;
     width: 1px;
