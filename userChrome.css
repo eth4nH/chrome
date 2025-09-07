@@ -70,7 +70,7 @@
 }
 
 /* Force show nav-bar when customizing */
-#main-window[customizing] {
+#main-window[customizing] #navigator-toolbox:not([tabs-hidden]) {
   #nav-bar {
     top: 0 !important;
     opacity: 1 !important;

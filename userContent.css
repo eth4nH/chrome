@@ -9,8 +9,27 @@
     .top-site-outer .tile,
     .search-handoff-button,
     .personalize-button,
-    .ds-card-grid .sections-card-ui {
+    .ds-card-grid .ds-card {
         backdrop-filter: blur(5px);
+    }
+
+    .weatherInfoLink,
+    .weatherButtonContextMenuWrapper {
+        transition: background 200ms;
+    }
+
+    .ds-card-grid .ds-card .title {
+        transition: color 200ms;
+    }
+    
+    /* Solid background for stories cards on hover */
+    .ds-card-grid .ds-card {
+        transition: linear 200ms;
+        transition-property: background, box-shadow;
+
+        &:hover {
+            background-color: var(--newtab-background-color-secondary) !important;
+        }
     }
 
     /* Workaround for transparent background on buttons when using uploaded backgrounds */
@@ -60,7 +79,7 @@
         .top-site-button {
             padding: 0 !important;
             background: transparent !important;
-            transition: background 200ms !important;    /* match context menu opacity transition */
+            transition: background 200ms;   /* match context menu opacity transition */
             border-radius: var(--border-radius-large);
         }
 
