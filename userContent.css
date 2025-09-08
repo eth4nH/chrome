@@ -72,19 +72,21 @@
         }
     }
 
-    /* Mostly making sure that .top-site-outer:hover has no effect */
+    /* Smaller top site button look */
     .top-site-outer {
         background: transparent !important;
+        width: calc(120px - 2 * var(--space-large)) !important;
+        margin-inline: var(--space-large);
 
         .top-site-button {
             padding: 0 !important;
-            background: transparent !important;
             transition: background 200ms;   /* match context menu opacity transition */
             border-radius: var(--border-radius-large);
         }
 
-        .top-site-inner {
-            margin-inline: var(--space-large);
+        .top-site-button > .icon {
+            transition: opacity 200ms;
+            z-index: 1 !important;      /* make sure pin icon is not covered by tile */
         }
 
         .title {
@@ -92,7 +94,6 @@
         }
 
         .tile {
-            background-color: var(--newtab-background-card) !important;
             border-color: transparent !important;
             box-shadow: none !important;
             outline-color: transparent !important;  /* disable outline when clicked */
