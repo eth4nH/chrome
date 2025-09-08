@@ -50,7 +50,7 @@
 }
 
 /* Show nav-bar when hovering over or focused within */
-#navigator-toolbox:is(:hover, :focus-within, :has(*[open], #downloads-button[notification='finish'])):not([tabs-hidden]) {
+#navigator-toolbox:is(:hover, :focus-within, :has(*:not(.tabbrowser-tab)[open], #downloads-button[notification='finish'])):not([tabs-hidden]) {
   & > #nav-bar {
     top: 0;
     opacity: 1;
