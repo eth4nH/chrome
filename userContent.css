@@ -5,14 +5,28 @@
     }
 
     .outer-wrapper:not(.only-search) {
+        padding-block-start: var(--space-xxlarge) !important;
+        
         .newtab-main {
             justify-content: space-between !important;
         }
-
-        .search-wrapper {
-            margin-block: var(--space-small) !important;
+        
+        &.fixed-search .newtab-main {
+            padding-block-start: 52px !important;
+            
+            & .search-wrapper {
+                padding-block: var(--space-large) !important;
+            }
         }
 
+        .search-wrapper {
+            margin-block: 0 !important;
+        }
+        
+        section.collapsible-section {
+            margin-block: var(--space-large) 0 !important;
+        }
+        
         @media not (min-width: 866px) {
             .search-wrapper .search-inner-wrapper {
                 width: calc(min(510px, 100vw - 96px)) !important;
@@ -63,11 +77,6 @@
                 width: calc(8 * 120px) !important;
                 inset-block-end: 0;
             }
-        }
-
-        .collapsible-section.top-sites {
-            margin: 0 !important;
-            padding: 0 !important;
         }
     }
 
