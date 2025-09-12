@@ -4,6 +4,73 @@
         background-color: rgb(0 0 0 / 0.25);
     }
 
+    .outer-wrapper:not(.only-search) {
+        .newtab-main {
+            justify-content: space-between !important;
+        }
+
+        .search-wrapper {
+            margin-block: var(--space-small) !important;
+        }
+
+        @media not (min-width: 866px) {
+            .search-wrapper .search-inner-wrapper {
+                width: calc(min(510px, 100vw - 96px)) !important;
+                margin-block-start: 96px !important;
+            }
+        }
+        @media (min-width: 866px) {
+            .search-wrapper .search-inner-wrapper {
+                width: 360px !important;
+            }
+        }
+        @media (min-width: 1122px) {
+            .search-wrapper .search-inner-wrapper {
+                width: 510px !important;
+            }
+        }
+        @media (min-width: 1378px) {
+            .search-wrapper .search-inner-wrapper {
+                width: 720px !important;
+            }
+        }
+
+        .logo-and-wordmark {
+            position: absolute;
+            inset-inline-start: calc(2 * var(--space-xxlarge));
+            inset-block-start: var(--space-xxlarge);
+        }
+
+        .top-sites-list {
+            position: relative;
+            inset-block-end: var(--space-xxlarge);
+            display: flex !important;
+            width: calc(3 * 120px) !important;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            > .top-site-outer {
+                flex: 0 0 calc(120px - 2 * var(--space-large));
+            }
+        }
+        @media (min-width: 724px) {
+            .top-sites-list {
+                width: calc(6 * 120px) !important;
+            }
+        }
+        @media (min-width: 1122px) {
+            .top-sites-list {
+                width: calc(8 * 120px) !important;
+                inset-block-end: 0;
+            }
+        }
+
+        .collapsible-section.top-sites {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    }
+
     /* Add background blur to elements with a non-transparent background */
     .weatherCard,
     .top-site-outer .tile,
@@ -90,7 +157,11 @@
         }
 
         .title {
-            padding-top: var(--space-xsmall) !important;    /* shorten distance to .tile */
+            padding: 0 0 var(--space-xsmall) !important;
+            & > .title-label {
+                width: calc(120px - 2 * var(--space-large)) !important;
+                padding-inline: var(--space-small) !important;
+            }
         }
 
         .tile {
@@ -106,7 +177,9 @@
         }
 
         .context-menu {
-            inset-block-start: var(--space-medium) !important;  /* move menu closer to button */
+            inset: initial !important;
+            inset-inline-start: calc(100% - 24px) !important;
+            inset-block-end: calc(100% + var(--space-xsmall)) !important;
         }
     }
 }
