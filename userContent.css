@@ -3,6 +3,21 @@
     #root {
         background-color: rgb(0 0 0 / 0.25);
     }
+    
+    .logo-and-wordmark .logo {
+        display: inline-block !important;
+        height: 64px !important;
+        width: 64px !important;
+        background-size: 64px !important;
+    }
+    
+    .logo-and-wordmark .wordmark {
+        display: inline-block !important;
+        height: 64px !important;
+        width: 105px !important;
+        background-size: 105px !important;
+        margin-inline-start: var(--space-large) !important;
+    }
 
     .outer-wrapper:not(.only-search) {
         padding-block-start: var(--space-xxlarge) !important;
@@ -11,22 +26,55 @@
             justify-content: space-between !important;
         }
         
+        /* Floating search bar with gradient background */
         &.fixed-search .newtab-main {
             padding-block-start: 52px !important;
             
             & .search-wrapper {
                 padding-block: var(--space-large) !important;
+                border-bottom: none !important;
+                background: linear-gradient(to bottom, 
+                                color(from var(--newtab-overlay-color) srgb r g b / 1), 
+                                color(from var(--newtab-overlay-color) srgb r g b / 0.6), 
+                                transparent) !important;
+            }
+            
+            & .search-handoff-button {
+                filter: drop-shadow(0 2px 5px var(--newtab-overlay-color));
+            }
+        }
+
+        /* Space out each section (top sites, stories, search bar, etc) */
+        section.collapsible-section {
+            margin-block: var(--space-large) 0 !important;
+        }
+        
+        /* Top sites on the bottom, each row centered */
+        .top-sites-list {
+            display: flex !important;
+            width: calc(3 * 120px) !important;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            > .top-site-outer {
+                flex: 0 0 calc(120px - 2 * var(--space-large));
+            }
+        }
+        @media (min-width: 724px) {
+            .top-sites-list {
+                width: calc(6 * 120px) !important;
+            }
+        }
+        @media (min-width: 1122px) {
+            .top-sites-list {
+                width: calc(8 * 120px) !important;
+                inset-block-end: 0;
             }
         }
 
         .search-wrapper {
             margin-block: 0 !important;
         }
-        
-        section.collapsible-section {
-            margin-block: var(--space-large) 0 !important;
-        }
-        
         @media not (min-width: 866px) {
             .search-wrapper .search-inner-wrapper {
                 width: calc(min(510px, 100vw - 96px)) !important;
@@ -49,34 +97,11 @@
             }
         }
 
+        /* Logo always in the top left corner */
         .logo-and-wordmark {
             position: absolute;
-            inset-inline-start: calc(2 * var(--space-xxlarge));
-            inset-block-start: var(--space-xxlarge);
-        }
-
-        .top-sites-list {
-            position: relative;
-            inset-block-end: var(--space-xxlarge);
-            display: flex !important;
-            width: calc(3 * 120px) !important;
-            flex-wrap: wrap;
-            justify-content: center;
-
-            > .top-site-outer {
-                flex: 0 0 calc(120px - 2 * var(--space-large));
-            }
-        }
-        @media (min-width: 724px) {
-            .top-sites-list {
-                width: calc(6 * 120px) !important;
-            }
-        }
-        @media (min-width: 1122px) {
-            .top-sites-list {
-                width: calc(8 * 120px) !important;
-                inset-block-end: 0;
-            }
+            inset-inline-start: calc(var(--space-xxlarge)) !important;
+            inset-block-start: var(--space-xxlarge) !important;
         }
     }
 
@@ -174,7 +199,6 @@
         }
 
         .tile {
-            border-color: transparent !important;
             box-shadow: none !important;
             outline-color: transparent !important;  /* disable outline when clicked */
         }
