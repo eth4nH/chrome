@@ -119,6 +119,17 @@
         transition: background 200ms;
     }
 
+    .weather {
+        inset-inline-end: var(--space-xxlarge) !important;
+    }
+
+    /* Workaround for transparent background on buttons when using uploaded backgrounds */
+    .activity-stream[style*='--newtab-wallpaper: url(blob:null/'] *:is(.weatherInfoLink, .weatherButtonContextMenuWrapper, .personalize-button) {
+        &:not(:hover, :focus) {
+            background-color: var(--newtab-weather-background-color) !important;
+        }
+    }
+
     .ds-card-grid .ds-card .title {
         transition: color 200ms;
     }
@@ -130,13 +141,6 @@
 
         &:hover {
             background-color: var(--newtab-background-color-secondary) !important;
-        }
-    }
-
-    /* Workaround for transparent background on buttons when using uploaded backgrounds */
-    .activity-stream[style*='--newtab-wallpaper: url(blob:null/'] *:is(.weatherInfoLink, .weatherButtonContextMenuWrapper, .personalize-button) {
-        &:not(:hover, :focus) {
-            background-color: var(--newtab-weather-background-color) !important;
         }
     }
 
