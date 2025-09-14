@@ -60,7 +60,7 @@
                 flex: 0 0 calc(120px - 2 * var(--space-large));
             }
         }
-        @media (min-width: 724px) {
+        @media (min-width: 866px) {
             .top-sites-list {
                 width: calc(6 * 120px) !important;
             }

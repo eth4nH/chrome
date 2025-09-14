@@ -118,10 +118,12 @@
 
 /* Drop down and show urlbar when focused */
 #urlbar[focused] {
-  --urlbar-height: calc(var(--urlbar-min-height) + 16px) !important;  
+  --urlbar-height: calc(var(--urlbar-min-height) + 16px) !important;
+  --urlbar-focused-width: max(400px, min(calc(var(--urlbar-width) + 2 * var(--urlbar-margin-inline)), 100vw));
   
   margin-left: calc(-1 * var(--urlbar-margin-inline)) !important;
-  width: calc(var(--urlbar-width) + 2 * var(--urlbar-margin-inline)) !important;
+  width: var(--urlbar-focused-width) !important;
+  inset-inline-start: calc((100vw - var(--urlbar-focused-width)) / 2) !important;
   top: 160px !important;
   transition-delay: 0s !important;
   filter: drop-shadow(0 5px 8px black) !important;
