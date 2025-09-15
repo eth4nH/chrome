@@ -18,6 +18,12 @@
         background-size: 105px !important;
         margin-inline-start: var(--space-large) !important;
     }
+    
+    .wallpaper-attribution {
+        position: absolute !important;
+        inset-block-end: 0 !important;
+        inset-inline-start: 0 !important;
+    }
 
     .outer-wrapper:not(.only-search) {
         padding-block-start: var(--space-xxlarge) !important;
@@ -60,6 +66,16 @@
                 flex: 0 0 calc(120px - 2 * var(--space-large));
             }
         }
+        @media (min-width: 724px) {
+            .top-sites-list {
+                width: calc(4 * 120px) !important;
+            }
+        }
+        @media (min-width: 724px) and (max-width: 865px) {
+            .top-sites-list .top-site-outer.hide-for-narrow {
+                display: inline-block !important;
+            }
+        }
         @media (min-width: 866px) {
             .top-sites-list {
                 width: calc(6 * 120px) !important;
@@ -76,9 +92,14 @@
             margin-block: 0 !important;
         }
         @media not (min-width: 866px) {
-            .search-wrapper .search-inner-wrapper {
-                width: calc(min(510px, 100vw - 96px)) !important;
+            .newtab-main {
                 margin-block-start: 96px !important;
+            }
+            .search-wrapper .search-inner-wrapper {
+                width: auto !important;
+            }
+            &.fixed-search .search-inner-wrapper {
+                margin-inline: var(--space-xxlarge) !important;
             }
         }
         @media (min-width: 866px) {
@@ -168,6 +189,8 @@
     /* Solid background for top sites when hover over */
     .top-site-outer.active,
     .top-site-inner:hover {
+        color-scheme: dark !important;
+        
         .top-site-button {
             background: var(--newtab-background-color-secondary) !important;    /* match tile hover bg color */
         }
@@ -195,6 +218,7 @@
         }
 
         .title {
+            transition: color 200ms;
             padding: 0 0 var(--space-xsmall) !important;
             & > .title-label {
                 width: calc(120px - 2 * var(--space-large)) !important;
@@ -208,6 +232,7 @@
         }
 
         .context-menu-button {
+            color-scheme: dark !important;
             opacity: 0 !important;
             inset-block-start: 0 !important;    /* move button to top right of .top-site-button */
             border-radius: 0 var(--border-radius-large) 0 var(--border-radius-medium) !important;   /* matches border radius to .top-site-button */

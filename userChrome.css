@@ -119,7 +119,7 @@
 /* Drop down and show urlbar when focused */
 #urlbar[focused] {
   --urlbar-height: calc(var(--urlbar-min-height) + 16px) !important;
-  --urlbar-focused-width: max(400px, min(calc(var(--urlbar-width) + 2 * var(--urlbar-margin-inline)), 100vw));
+  --urlbar-focused-width: clamp(400px, calc(var(--urlbar-width) + 2 * var(--urlbar-margin-inline)), 100vw);
   
   margin-left: calc(-1 * var(--urlbar-margin-inline)) !important;
   width: var(--urlbar-focused-width) !important;
