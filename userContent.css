@@ -50,6 +50,11 @@
             }
         }
 
+        /* Space out top sites and search bar more when recommended stories enabled */
+        &.ds-outer-wrapper-search-alignment .body-wrapper.on {
+            margin-block-start: var(--space-xxlarge) !important;
+        }
+
         /* Space out each section (top sites, stories, search bar, etc) */
         section.collapsible-section {
             margin-block: var(--space-large) 0 !important;
@@ -126,13 +131,16 @@
         }
     }
 
-    /* Add background blur to elements with a non-transparent background */
-    .weatherCard,
-    .top-site-outer .tile,
-    .search-handoff-button,
-    .personalize-button,
-    .ds-card-grid .ds-card {
-        backdrop-filter: blur(5px);
+    /* Add background blur to elements with a non-transparent background, disabled when recommended
+    stories enabled for performance */
+    #root > div:not(.has-recommended-stories) {
+        .weatherCard,
+        .top-site-outer .tile,
+        .search-handoff-button,
+        .personalize-button,
+        .ds-card-grid .ds-card {
+            backdrop-filter: blur(5px);
+        }
     }
 
     .weatherInfoLink,
@@ -171,7 +179,7 @@
     }
 
     /* Translucent search bar when not focused */
-    .search-wrapper:not(.fake-focus) .search-handoff-button {
+    .search-wrapper:not(.fake-focus) .search-handoff-button:not(:hover) {
         background-color: color-mix(in srgb, var(--newtab-background-color-secondary) 80%, transparent) !important;
     }
 
@@ -184,6 +192,7 @@
     .search-handoff-button {
         border-width: 2px !important;
         border-radius: var(--border-radius-large) !important;
+        transition: background-color 200ms;
     }
 
     /* Solid background for top sites when hover over */
