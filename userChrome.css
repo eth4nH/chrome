@@ -89,7 +89,8 @@
 
 
 #urlbar-container {
-  --urlbar-container-height: calc(var(--navigator-toolbox-height) - 2px) !important;
+  --urlbar-container-height: calc(var(--navigator-toolbox-height) - 4px) !important;
+  --urlbar-min-height: var(--urlbar-container-height) !important;
 }
 
 /* Fit urlbar into shorter navbar */
