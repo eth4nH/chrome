@@ -17,6 +17,12 @@
         background-size: 105px !important;
         margin-inline-start: var(--space-large) !important;
     }
+
+    @media (max-width: 865px) {
+        .wordmark {
+            display: none !important;
+        }
+    }
     
     .wallpaper-attribution {
         position: absolute !important;
