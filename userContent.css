@@ -177,6 +177,18 @@
     .personalize-button {
         border-radius: var(--border-radius-medium) !important;
     }
+    
+    .personalize-button:is(.personalize-animate-enter, .personalize-animate-enter-done):focus:not(:hover) {
+        background-color: var(--newtab-weather-background-color) !important;
+        min-width: var(--button-collapsed-width) !important;
+        width: var(--button-collapsed-width) !important;
+        
+        > label {
+            margin-inline-start: 0 !important;
+            opacity: 0 !important;
+            transform: translateX(var(--label-shift-by-value)) !important;
+        }
+    }
 
     /* Translucent search bar when not focused */
     .search-wrapper:not(.fake-focus) .search-handoff-button:not(:hover) {
