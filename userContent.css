@@ -6,14 +6,13 @@
     
     .logo-and-wordmark .logo {
         display: inline-block !important;
-        height: 64px !important;
-        width: 64px !important;
-        background-size: 64px !important;
+        height: 52px !important;
+        width: 52px !important;
+        background-size: 52px !important;
     }
     
     .logo-and-wordmark .wordmark {
-        display: inline-block !important;
-        height: 64px !important;
+        height: 52px !important;
         width: 105px !important;
         background-size: 105px !important;
         margin-inline-start: var(--space-large) !important;
@@ -96,20 +95,22 @@
         .search-wrapper {
             margin-block: 0 !important;
         }
-        @media not (min-width: 866px) {
-            .newtab-main {
-                margin-block-start: 96px !important;
-            }
+        .search-inner-wrapper {
+            width: 240px !important;
+        }
+        @media (min-width: 596px) {
             .search-wrapper .search-inner-wrapper {
-                width: auto !important;
+                width: 360px !important;
             }
-            &.fixed-search .search-inner-wrapper {
-                margin-inline: var(--space-xxlarge) !important;
+        }
+        @media (min-width: 724px) {
+            .search-wrapper .search-inner-wrapper {
+                width: 510px !important;
             }
         }
         @media (min-width: 866px) {
             .search-wrapper .search-inner-wrapper {
-                width: 360px !important;
+                width: 410px !important;
             }
         }
         @media (min-width: 1122px) {
