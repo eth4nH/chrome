@@ -57,7 +57,7 @@
 
         /* Space out top sites and search bar more when recommended stories enabled */
         &.ds-outer-wrapper-search-alignment .body-wrapper.on {
-            margin-block-start: var(--space-large) !important;
+            margin-block-start: var(--space-xlarge) !important;
         }
 
         /* Space out each section (top sites, stories, search bar, etc) */
