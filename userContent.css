@@ -159,7 +159,7 @@
     stories enabled for performance */
     #root > div:not(.has-recommended-stories) {
         .weatherCard,
-        .top-site-outer .tile,
+        .top-site-outer .tile::before,
         .search-handoff-button,
         .personalize-button,
         .ds-card-grid .ds-card {
@@ -236,10 +236,6 @@
     .top-site-inner:hover {
         color-scheme: dark !important;
         z-index: 5 !important;
-        
-        .top-site-button {
-            background: var(--newtab-background-color-secondary) !important;    /* match tile hover bg color */
-        }
 
         .context-menu-button {
             opacity: 1 !important;
@@ -274,7 +270,26 @@
 
         .tile {
             box-shadow: none !important;
+            background-color: transparent !important;
             outline-color: transparent !important;  /* disable outline when clicked */
+        }
+        
+        .tile::before {
+            content: '';
+            height: 100%;
+            width: 100%;
+            top: 0;
+            background-color: var(--newtab-background-card);
+            position: absolute;
+            border-radius: var(--border-radius-large);
+            transition: ease 200ms;
+            transition-property: height, width, background;
+        }
+        
+        &:is(:hover, .active) .tile::before {
+            height: 100px;
+            width: calc(120px - 2 * var(--space-large));
+            background-color: var(--newtab-background-color-secondary);
         }
 
         .context-menu-button {
