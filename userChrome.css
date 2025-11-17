@@ -155,11 +155,13 @@
   &[selected] .tab-background {
     background-color: color-mix(in srgb, light-dark(white, dimgray), var(--identity-tab-color) 25%) !important;
     outline-color: var(--identity-tab-color) !important;
+    outline-width: 2px !important;
+    outline-offset: -2px !important;
   }
   /* Make tab line visible */
   .tab-context-line {
-    margin-top: -1px !important;
-    height: 3px !important;
+    margin-top: 0px !important;
+    height: 2px !important;
     margin-inline: 8px !important;
     border-radius: 3px !important;
   }
@@ -167,8 +169,17 @@
 
 /* Move tab group line down a bit */
 tab-group > .tabbrowser-tab .tab-group-line,
-.tab-group-label-container {
+.tab-group-label-container::after,
+.tab-group-overflow-count-container::after {
   margin-bottom: -1px;
+}
+
+tab-group[collapsed] > .tab-group-label-container:not([open]) {
+  opacity: 0.5;
+}
+
+tab-group > .tab-group-label-container {
+  transition: opacity 150ms;
 }
 
 /* Smaller tab close button */
@@ -195,8 +206,8 @@ tab-group > .tabbrowser-tab .tab-group-line,
   }
   
   /* Tab dividers */
-  .tabbrowser-tab:not([selected], [multiselected], :hover) + .tabbrowser-tab:not([selected], [multiselected], :hover)::before,
-  #tabbrowser-arrowscrollbox:not([overflowing]) .tabbrowser-tab:not([selected], [multiselected], :hover) + #tabbrowser-arrowscrollbox-periphery::before {
+  *:is(tab, tab-group):not([selected], [multiselected], :hover, [aria-hidden], [collapsed]) + *:is(tab):not([selected], [multiselected], :hover, [aria-hidden], [collapsed])::before,
+  #tabbrowser-arrowscrollbox:not([overflowing]) *:is(tab, tab-group):not([selected], [multiselected], :hover, [aria-hidden]) + #tabbrowser-arrowscrollbox-periphery::before {
     content: '';
     position: relative;
     width: 1px;
@@ -207,9 +218,9 @@ tab-group > .tabbrowser-tab .tab-group-line,
   }
 
   /* Shorter tab spacing */
-  .tabbrowser-tab { padding-inline: 1px !important; }
-  .tabbrowser-tab:nth-child(n+2) { padding-left: calc(var(--tab-spacing) / 2) !important; }
-  .tabbrowser-tab:nth-last-child(n+2) { padding-right: calc(var(--tab-spacing) / 2) !important; }
+  .tabbrowser-tab:not([aria-hidden]) { padding-inline: 1px !important; }
+  .tabbrowser-tab:not([aria-hidden]):nth-child(n+2) { padding-left: calc(var(--tab-spacing) / 2) !important; }
+  .tabbrowser-tab:not([aria-hidden]):nth-last-child(n+2) { padding-right: calc(var(--tab-spacing) / 2) !important; }
 }
 
 /* Vertical tab adjustments */
