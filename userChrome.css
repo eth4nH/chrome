@@ -40,14 +40,26 @@
 #navigator-toolbox:not([tabs-hidden]) #nav-bar {
   top: calc(-1*var(--navigator-toolbox-height));
   margin-bottom: calc(-1*var(--navigator-toolbox-height));
-  padding-bottom: 1px !important;
   max-height: calc(var(--navigator-toolbox-height)) !important;
+  border: 0 !important;
+  padding: 0 !important;
   opacity: 0;
   border-top-color: transparent !important;
   background: var(--toolbar-bgcolor) linear-gradient(rgb(32, 32, 32)) center !important;
   background-blend-mode: lighten;
+  box-shadow: none;
   transition: var(--drop-down-transition) !important;
   transition-property: top, opacity !important;
+      
+  &::after {
+    content: '';
+    background: linear-gradient(to bottom, rgb(0 0 0 / 0.2), transparent);
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    top: var(--navigator-toolbox-height);
+    pointer-events: none;
+  }
 }
 
 /* Show nav-bar when hovering over or focused within */
