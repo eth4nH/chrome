@@ -147,7 +147,7 @@
   
   /* Keep urlbar buttons square */
   > .urlbar-input-container {
-    padding-block: 10px !important;
+    padding-block: 8px !important;
     padding-inline: calc(var(--urlbar-margin-inline) + var(--urlbar-container-padding)) !important;
   }
 }
