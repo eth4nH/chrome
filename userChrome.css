@@ -1,11 +1,12 @@
 :root {
   --navigator-toolbox-height: 28px !important;
+  --personal-toolbar-height: calc(2.5ch + 6px);
   --tab-min-height: calc(var(--navigator-toolbox-height)) !important;
   --tab-border-radius: 8px !important;
   --toolbarbutton-border-radius: var(--tab-border-radius) !important;
   --toolbarbutton-outer-padding: 2px !important;
   --tabstrip-min-height: 0 !important;
-  --drop-down-transition: 0.15s ease-in-out 0.5s;
+  --drop-down-transition: 0.15s ease-in-out 1s;
 }
 
 
@@ -50,7 +51,7 @@
   box-shadow: none;
   transition: var(--drop-down-transition) !important;
   transition-property: top, opacity !important;
-      
+
   &::after {
     content: '';
     background: linear-gradient(to bottom, rgb(0 0 0 / 0.2), transparent);
@@ -62,8 +63,22 @@
   }
 }
 
+#PersonalToolbar:not([collapsed]) {
+  margin-top: calc(-1 * var(--personal-toolbar-height)) !important;
+  opacity: 0;
+  max-height: var(--personal-toolbar-height) !important;
+  background: var(--toolbar-bgcolor) linear-gradient(rgb(64, 64, 64)) center !important;
+  transition: var(--drop-down-transition) !important;
+  transition-property: transform;
+}
+
+#notifications-toolbar {
+  transition: var(--drop-down-transition) !important;
+  transition-property: transform;
+}
+
 /* Show nav-bar when hovering over or focused within */
-#navigator-toolbox:is(:hover, :focus-within, :has(*:not(.tabbrowser-tab)[open], #downloads-button[notification='finish'])):not([tabs-hidden]) {
+#navigator-toolbox:is(:hover, :focus-within, :has(*:not(.tabbrowser-tab)[open], #downloads-button[notification='finish'], #reload-button[disabled], #stop-button:not([disabled]))):not([tabs-hidden]) {
   & > #nav-bar {
     top: 0;
     opacity: 1;
@@ -71,13 +86,31 @@
   }
 
   & #urlbar {
-    transition-delay: 0s !important;
     opacity: 1;
+    transition-delay: 0s !important;
+  }
+  
+  & #notifications-toolbar {
+    translate: 0 var(--navigator-toolbox-height);
+    background-color: rgb(64, 64, 64) !important;
+    transition-delay: 0s !important;
+  }
+  
+  & > #PersonalToolbar:not([collapsed]) ~ #notifications-toolbar {
+    translate: 0 calc(var(--navigator-toolbox-height) + var(--personal-toolbar-height));
   }
 
   /* Move sidepanel down with navigator toolbox so it doesn't get drawn over */
   & ~ #browser > #sidebar-main {
     margin-top: var(--navigator-toolbox-height);
+    transition-delay: 0s !important;
+  }
+}
+
+#main-window:not([customizing]) #navigator-toolbox:is(:hover, :focus-within, :has(*:not(.tabbrowser-tab)[open])) {
+  & #PersonalToolbar {
+    opacity: 1;
+    translate: 0 calc(var(--navigator-toolbox-height) + var(--personal-toolbar-height));
     transition-delay: 0s !important;
   }
 }
@@ -93,6 +126,13 @@
   }
 
   #urlbar {
+    opacity: 1 !important;
+    transition: none !important;
+    transition-delay: 0 !important;
+  }
+  
+  #PersonalToolbar {
+    margin-top: 0 !important;
     opacity: 1 !important;
     transition: none !important;
     transition-delay: 0 !important;
@@ -122,7 +162,7 @@
     transition-property: height !important;
   }
   
-  box[role='button'], hbox[role='button'], image[role='button'], toolbarbutton {
+  #page-action-buttons *:is(box[role='button'], hbox[role='button'], image[role='button'], toolbarbutton) {
     min-width: 22px !important;
     height: 22px !important;
     align-self: center;
