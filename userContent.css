@@ -30,7 +30,7 @@
         inset-inline-start: 0 !important;
     }
 
-    .outer-wrapper:not(.only-search) {
+    .outer-wrapper {
         padding-block-start: var(--space-xxlarge) !important;
         
         .newtab-main {
@@ -155,14 +155,12 @@
         }
     }
 
-    /* Add background blur to elements with a non-transparent background, disabled when recommended
-    stories enabled for performance */
-    #root > div:not(.has-recommended-stories) {
+    /* Add background blur to some elements with a non-transparent background */
+    #root > div {
         .weatherCard,
         .top-site-outer .tile::before,
         .search-handoff-button,
-        .personalize-button,
-        .ds-card-grid .ds-card {
+        .personalize-button {
             backdrop-filter: blur(5px);
         }
     }
@@ -176,12 +174,12 @@
         inset-inline-end: var(--space-xxlarge) !important;
     }
 
-    /* Workaround for transparent background on buttons when using uploaded backgrounds */
+    /* Workaround for transparent background on buttons when using uploaded backgrounds
     .activity-stream[style*='--newtab-wallpaper: url(blob:null/'] *:is(.weatherInfoLink, .weatherButtonContextMenuWrapper, .personalize-button) {
         &:not(:hover, :focus) {
             background-color: var(--newtab-weather-background-color) !important;
         }
-    }
+    } */
 
     .ds-card-grid .ds-card .title {
         transition: color 200ms;
@@ -229,6 +227,10 @@
         border-width: 2px !important;
         border-radius: var(--border-radius-large) !important;
         transition: background-color 200ms;
+    }
+    
+    .search-wrapper:not(.fake-focus) .search-handoff-button:hover {
+        outline: 1px solid var(--newtab-primary-action-background) !important;
     }
 
     /* Solid background for top sites when hover over */
