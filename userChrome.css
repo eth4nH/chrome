@@ -39,7 +39,7 @@
 
 /* Nav bar on top of tabs by default */
 #navigator-toolbox:not([tabs-hidden]) #nav-bar {
-  top: calc(-1*var(--navigator-toolbox-height));
+  top: calc(-2*var(--navigator-toolbox-height));
   margin-bottom: calc(-1*var(--navigator-toolbox-height));
   max-height: calc(var(--navigator-toolbox-height)) !important;
   border: 0 !important;
