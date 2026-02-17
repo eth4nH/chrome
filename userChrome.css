@@ -335,3 +335,7 @@ menupopup {
 #context-navigation > .menuitem-iconic > .menu-icon {
   padding: var(--menuitem-padding) !important;
 }
+
+.browserSidebarContainer .dialogBox {
+  margin-top: var(--navigator-toolbox-height) !important;
+}
