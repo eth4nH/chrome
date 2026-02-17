@@ -184,7 +184,7 @@
   translate: 0 160px;
   top: 0 !important;
   transition-delay: 0s !important;
-  filter: drop-shadow(0 5px 8px black) !important;
+  filter: drop-shadow(0 5px 20px black) drop-shadow(0 5px 20px white);
   
   /* Keep urlbar buttons square */
   > .urlbar-input-container {
