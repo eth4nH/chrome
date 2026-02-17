@@ -152,7 +152,7 @@
   --urlbar-height: var(--urlbar-container-height) !important;
 
   position: relative !important;
-  transition: top var(--animation-easing-function) 150ms, /* match urlbar-grow animation */
+  transition: translate var(--animation-easing-function) 150ms, /* match urlbar-grow animation */
               filter var(--animation-easing-function) 150ms,
               opacity var(--drop-down-transition) !important;
 
@@ -181,7 +181,8 @@
   margin-left: calc(-1 * var(--urlbar-margin-inline)) !important;
   width: var(--urlbar-focused-width) !important;
   inset-inline-start: calc((100vw - var(--urlbar-focused-width)) / 2) !important;
-  top: 160px !important;
+  translate: 0 160px;
+  top: 0 !important;
   transition-delay: 0s !important;
   filter: drop-shadow(0 5px 8px black) !important;
   
