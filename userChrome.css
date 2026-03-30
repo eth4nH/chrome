@@ -37,9 +37,23 @@
   align-self: center;
 }
 
+#navigator-toolbox:not([tabs-hidden], :has(notification-message))::after {
+  content: '';
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0.2), transparent);
+  width: 100%;
+  height: 20px;
+  position: absolute;
+  top: var(--navigator-toolbox-height);
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--drop-down-transition);
+  transition-property: translate, opacity;
+}
+
 /* Nav bar on top of tabs by default */
 #navigator-toolbox:not([tabs-hidden]) #nav-bar {
-  top: calc(-2*var(--navigator-toolbox-height));
+  top: calc(-1*var(--navigator-toolbox-height));
+  visibility: visible;
   margin-bottom: calc(-1*var(--navigator-toolbox-height));
   max-height: calc(var(--navigator-toolbox-height)) !important;
   border: 0 !important;
@@ -51,25 +65,29 @@
   box-shadow: none;
   transition: var(--drop-down-transition) !important;
   transition-property: top, opacity !important;
-
-  &::after {
-    content: '';
-    background: linear-gradient(to bottom, rgb(0 0 0 / 0.2), transparent);
-    width: 100%;
-    height: 20px;
-    position: absolute;
-    top: var(--navigator-toolbox-height);
-    pointer-events: none;
-  }
 }
 
 #PersonalToolbar:not([collapsed]) {
   margin-top: calc(-1 * var(--personal-toolbar-height)) !important;
   opacity: 0;
+  visibility: visible;
   max-height: var(--personal-toolbar-height) !important;
   background: var(--toolbar-bgcolor) linear-gradient(rgb(64, 64, 64)) center !important;
   transition: var(--drop-down-transition) !important;
-  transition-property: transform;
+  transition-property: translate, opacity !important;
+}
+
+/* Collapse some navigator toolbox elements to allow for tab dragging */
+#navigator-toolbox:not([tabs-hidden]):-moz-window-inactive {
+  > #nav-bar {
+    visibility: collapse;
+    transition-property: top, opacity, visibility !important;
+  }
+  
+  > #PersonalToolbar:not([collapsed]) {
+    visibility: collapse;
+    transition-property: translate, opacity, visibility !important;
+  }
 }
 
 #notifications-toolbar {
@@ -81,6 +99,7 @@
 #navigator-toolbox:is(:hover, :focus-within, :has(*:not(.tabbrowser-tab)[open], #downloads-button[notification='finish'], #reload-button[disabled], #stop-button:not([disabled]))):not([tabs-hidden]) {
   & > #nav-bar {
     top: 0;
+    visibility: visible;
     opacity: 1;
     transition-delay: 0s !important;
   }
@@ -105,11 +124,22 @@
     margin-top: var(--navigator-toolbox-height);
     transition-delay: 0s !important;
   }
+  
+  &::after {
+    opacity: 1;
+    translate: 0 var(--navigator-toolbox-height);
+    transition-delay: 0s !important;
+  }
+  
+  &:has(> #PersonalToolbar:not([collapsed]))::after {
+    translate: 0 calc(var(--navigator-toolbox-height) + var(--personal-toolbar-height));
+  }
 }
 
 #main-window:not([customizing]) #navigator-toolbox:is(:hover, :focus-within, :has(*:not(.tabbrowser-tab)[open])) {
-  & #PersonalToolbar {
+  & #PersonalToolbar:not([collapsed]) {
     opacity: 1;
+    visibility: visible;
     translate: 0 calc(var(--navigator-toolbox-height) + var(--personal-toolbar-height));
     transition-delay: 0s !important;
   }
@@ -120,6 +150,7 @@
   #nav-bar {
     top: 0 !important;
     opacity: 1 !important;
+    visibility: visible !important;
     margin-bottom: 0 !important;
     transition: none !important;
     transition-delay: 0 !important;
@@ -134,6 +165,7 @@
   #PersonalToolbar {
     margin-top: 0 !important;
     opacity: 1 !important;
+    visibility: visible !important;
     transition: none !important;
     transition-delay: 0 !important;
   }
