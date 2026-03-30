@@ -267,6 +267,17 @@ tab-group > .tab-group-label-container {
   transition: opacity 150ms;
 }
 
+/* Tab group line for split view tab */
+tab-group:not([collapsed]) > tab-split-view-wrapper::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: var(--tab-group-line-color);
+  inset-block-end: -1px;
+  inset-inline-start: -0.5px;
+}
+
 /* Smaller tab close button */
 .tab-close-button {
   height: 20px !important;
@@ -277,6 +288,20 @@ tab-group > .tab-group-label-container {
   &:hover {
     background-color: red !important;
   }
+}
+
+/* Tab split view changes */
+tab-split-view-wrapper {
+  align-items: normal !important;
+  display: flex !important;
+  flex-direction: row !important;
+  margin-block: 1px !important;
+  padding-block: 0px !important;
+}
+
+/* Disable tab split view splitter */
+#tabbrowser-tabs tab-split-view-wrapper:not([hasactivetab]) .tabbrowser-tab:last-child {
+  border-left: 0 !important;
 }
 
 /* Horizontal tab fixes */
@@ -291,21 +316,21 @@ tab-group > .tab-group-label-container {
   }
   
   /* Tab dividers */
-  *:is(tab, tab-group):not([selected], [multiselected], :hover, [aria-hidden], [collapsed]) + *:is(tab):not([selected], [multiselected], :hover, [aria-hidden], [collapsed])::before,
+  *:is(tab, tab-group, tab-split-view-wrapper):not([selected], [multiselected], :hover, [aria-hidden], [collapsed], [hasactivetab]) + *:is(tab, tab-group, tab-split-view-wrapper):not([selected], [multiselected], :hover, [aria-hidden], [collapsed], [hasactivetab])::before,
   #tabbrowser-arrowscrollbox:not([overflowing]) *:is(tab, tab-group):not([selected], [multiselected], :hover, [aria-hidden]) + #tabbrowser-arrowscrollbox-periphery::before {
     content: '';
     position: relative;
     width: 1px;
     height: var(--tab-divider-height);
-    margin-block: calc((var(--navigator-toolbox-height) - var(--tab-divider-height)) / 2);
+    margin-block: auto;
     margin-inline: calc(-1 * (var(--tab-spacing) / 2 + 0.5px)) calc(var(--tab-spacing) / 2 - 0.5px);
     background: color-mix(in srgb, currentColor 25%, transparent);
   }
 
   /* Shorter tab spacing */
-  .tabbrowser-tab:not([aria-hidden]) { padding-inline: 1px !important; }
-  .tabbrowser-tab:not([aria-hidden]):nth-child(n+2) { padding-left: calc(var(--tab-spacing) / 2) !important; }
-  .tabbrowser-tab:not([aria-hidden]):nth-last-child(n+2) { padding-right: calc(var(--tab-spacing) / 2) !important; }
+  *:is(tab, tab-group, tab-split-view-wrapper):not(tab[aria-hidden]) { padding-inline: 1px !important; }
+  *:is(tab, tab-group, tab-split-view-wrapper):not(tab[aria-hidden]):nth-child(n+2) { padding-left: calc(var(--tab-spacing) / 2) !important; }
+  *:is(tab, tab-group, tab-split-view-wrapper):not(tab[aria-hidden]):nth-last-child(n+2) { padding-right: calc(var(--tab-spacing) / 2) !important; }
 }
 
 /* Vertical tab adjustments */
