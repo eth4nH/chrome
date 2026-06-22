@@ -1,0 +1,319 @@
+@-moz-document url(about:home), url(about:newtab), url(about:privatebrowsing) {
+    /* Reduce brightness of wallpaper */
+    .activity-stream {
+        backdrop-filter: brightness(75%);
+    }
+    
+    .logo-and-wordmark .logo {
+        display: inline-block !important;
+        height: 52px !important;
+        width: 52px !important;
+        background-size: 52px !important;
+    }
+    
+    .logo-and-wordmark .wordmark {
+        height: 52px !important;
+        width: 105px !important;
+        background-size: 105px !important;
+        margin-inline-start: var(--space-large) !important;
+    }
+
+    @media (max-width: 865px) {
+        .wordmark {
+            display: none !important;
+        }
+    }
+    
+    .wallpaper-attribution {
+        position: absolute !important;
+        inset-block-end: 0 !important;
+        inset-inline-start: 0 !important;
+    }
+
+    .outer-wrapper {
+        padding-block-start: var(--space-xxlarge) !important;
+        
+        /* Floating search bar with gradient background */
+        &.fixed-search .newtab-main {
+            padding-block-start: 52px !important;
+            
+            & .search-wrapper {
+                padding-block: var(--space-large) !important;
+                border-bottom: none !important;
+                background: linear-gradient(to bottom, 
+                                color(from var(--newtab-overlay-color) srgb r g b / 1), 
+                                color(from var(--newtab-overlay-color) srgb r g b / 0.6), 
+                                transparent) !important;
+            }
+            
+            & .search-handoff-button {
+                filter: drop-shadow(0 2px 5px var(--newtab-overlay-color));
+            }
+        }
+
+        /* Space out top sites and search bar more when recommended stories enabled */
+        &.ds-outer-wrapper-search-alignment .body-wrapper.on {
+            margin-block-start: var(--space-xlarge) !important;
+        }
+
+        /* Space out each section (top sites, stories, search bar, etc) */
+        section.collapsible-section {
+            margin-block: var(--space-large) 0 !important;
+        }
+        
+        .top-sites {
+            padding: 0 !important;
+        }
+        
+        /* Top sites on the bottom, each row centered */
+        .top-sites-list {
+            display: flex !important;
+            width: calc(3 * 120px) !important;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            > .top-site-outer {
+                flex: 0 0 calc(120px - 2 * var(--space-large));
+            }
+        }
+        @media (min-width: 724px) {
+            .top-sites-list {
+                width: calc(6 * 120px) !important;
+            }
+        }
+        @media (min-width: 1122px) {
+            .top-sites-list {
+                width: calc(8 * 120px) !important;
+            }
+        }
+        @media (max-width: 723px) {
+            .top-sites-list > .top-site-outer:nth-of-type(3n) .context-menu {
+                inset-inline-start: unset !important;
+                inset-inline-end: 0 !important;
+            }
+        }
+        @media (min-width: 724px) and (max-width: 865px) {
+            .top-sites-list > .top-site-outer:is(:nth-of-type(6n), :nth-of-type(6n-1)) .context-menu {
+                inset-inline-start: unset !important;
+                inset-inline-end: 0 !important;
+            }
+        }
+        @media (min-width: 866px) and (max-width: 1121px) {
+            .top-sites-list > .top-site-outer:nth-of-type(6n) .context-menu {
+                inset-inline-start: unset !important;
+                inset-inline-end: 0 !important;
+            }
+        }
+        @media (min-width: 1121px) and (max-width: 1377px) {
+            .top-sites-list > .top-site-outer:nth-of-type(8n) .context-menu {
+                inset-inline-start: unset !important;
+                inset-inline-end: 0 !important;
+            }
+        }
+
+        .search-wrapper {
+            margin-block: 0 !important;
+        }
+        .search-inner-wrapper {
+            width: 240px !important;
+        }
+        @media (min-width: 596px) {
+            .search-wrapper .search-inner-wrapper {
+                width: 360px !important;
+            }
+        }
+        @media (min-width: 724px) {
+            .search-wrapper .search-inner-wrapper {
+                width: 510px !important;
+            }
+        }
+        @media (min-width: 866px) {
+            .search-wrapper .search-inner-wrapper {
+                width: 410px !important;
+            }
+        }
+        @media (min-width: 1122px) {
+            .search-wrapper .search-inner-wrapper {
+                width: 510px !important;
+            }
+        }
+        @media (min-width: 1378px) {
+            .search-wrapper .search-inner-wrapper {
+                width: 720px !important;
+            }
+        }
+
+        /* Logo always in the top left corner */
+        .logo-and-wordmark {
+            position: absolute;
+            inset-inline-start: calc(var(--space-xxlarge)) !important;
+            inset-block-start: var(--space-xxlarge) !important;
+        }
+    }
+
+    /* Add background blur to some elements with a non-transparent background */
+    #root > div {
+        .weatherCard,
+        .top-site-outer .tile::before,
+        .search-handoff-button,
+        .personalize-button {
+            backdrop-filter: blur(5px);
+        }
+    }
+
+    .weatherInfoLink,
+    .weatherButtonContextMenuWrapper {
+        transition: background 200ms;
+    }
+
+    .weather {
+        inset-inline-end: var(--space-xxlarge) !important;
+    }
+
+    /* Workaround for transparent background on buttons when using uploaded backgrounds
+    .activity-stream[style*='--newtab-wallpaper: url(blob:null/'] *:is(.weatherInfoLink, .weatherButtonContextMenuWrapper, .personalize-button) {
+        &:not(:hover, :focus) {
+            background-color: var(--newtab-weather-background-color) !important;
+        }
+    } */
+
+    .ds-card-grid .ds-card .title {
+        transition: color 200ms;
+    }
+    
+    /* Solid background for stories cards on hover */
+    .ds-card-grid .ds-card {
+        transition: linear 200ms;
+        transition-property: background, box-shadow;
+
+        &:hover {
+            background-color: var(--newtab-background-color-secondary) !important;
+        }
+    }
+
+    /* Larger border radius */
+    .personalize-button {
+        border-radius: var(--border-radius-medium) !important;
+    }
+    
+    .personalize-button:is(.personalize-animate-enter, .personalize-animate-enter-done):focus:not(:hover) {
+        background-color: var(--newtab-weather-background-color) !important;
+        min-width: var(--button-collapsed-width) !important;
+        width: var(--button-collapsed-width) !important;
+        
+        > label {
+            margin-inline-start: 0 !important;
+            opacity: 0 !important;
+            transform: translateX(var(--label-shift-by-value)) !important;
+        }
+    }
+
+    /* Translucent search bar when not focused */
+    .search-wrapper:not(.fake-focus) .search-handoff-button:not(:hover) {
+        background-color: color-mix(in srgb, var(--newtab-background-color-secondary) 80%, transparent) !important;
+    }
+
+    /* Disable extra outline */
+    .search-wrapper.fake-focus .search-handoff-button {
+        box-shadow: none !important;
+    }
+
+    /* Thicker outline, larger border radius */
+    .search-handoff-button {
+        border-width: 2px !important;
+        border-radius: var(--border-radius-large) !important;
+        transition: background-color 200ms;
+    }
+    
+    .search-wrapper:not(.fake-focus) .search-handoff-button:hover {
+        outline: 1px solid var(--newtab-primary-action-background) !important;
+    }
+
+    /* Solid background for top sites when hover over */
+    .top-site-outer.active,
+    .top-site-inner:hover {
+        color-scheme: dark !important;
+        z-index: 5 !important;
+
+        .context-menu-button {
+            opacity: 1 !important;
+        }
+    }
+
+    /* Smaller top site button look */
+    .top-site-outer {
+        background: transparent !important;
+        width: calc(120px - 2 * var(--space-large)) !important;
+        margin-inline: var(--space-large);
+
+        .top-site-button {
+            padding: 0 !important;
+            transition: background 200ms;   /* match context menu opacity transition */
+            border-radius: var(--border-radius-large);
+        }
+
+        .top-site-button > .icon {
+            transition: opacity 200ms;
+            z-index: 1 !important;      /* make sure pin icon is not covered by tile */
+        }
+
+        .title {
+            transition: color 200ms;
+            padding: 0 0 var(--space-xsmall) !important;
+            & > .title-label {
+                width: calc(120px - 2 * var(--space-large)) !important;
+                padding-inline: var(--space-small) !important;
+            }
+        }
+
+        .tile {
+            align-self: center !important;
+            box-shadow: none !important;
+            background-color: transparent !important;
+            outline-color: transparent !important;  /* disable outline when clicked */
+        }
+        
+        .tile::before {
+            content: '';
+            height: 100%;
+            width: 100%;
+            top: 0;
+            background-color: var(--newtab-background-card);
+            position: absolute;
+            border-radius: var(--border-radius-large);
+            transition: ease 200ms;
+            transition-property: height, width, background;
+        }
+        
+        &:is(:hover, .active) .tile::before {
+            height: 120px;
+            width: calc(120px - 2 * var(--space-large));
+            background-color: var(--newtab-background-color-secondary);
+        }
+
+        .context-menu-button {
+            color-scheme: dark !important;
+            opacity: 0 !important;
+            inset: initial !important;
+            inset-inline-end: 0 !important;
+            inset-block-start: 1px !important;    /* move button to top right of .top-site-button */
+            border-radius: 0 var(--border-radius-large) 0 var(--border-radius-medium) !important;   /* matches border radius to .top-site-button */
+        }
+
+        .context-menu {
+            inset: initial !important;
+            inset-inline-start: 0 !important;
+            inset-block-end: calc(100% + var(--space-xsmall)) !important;
+            z-index: 6 !important;
+        }
+    }
+    
+    .has-recommended-stories .top-site-outer .context-menu {
+        inset-block-end: unset !important;
+        inset-block-start: calc(100% + var(--space-xsmall)) !important;
+    }
+    
+    .customize-menu:not([open]) {
+        
+    }
+}

@@ -28,7 +28,7 @@
   z-index: 3 !important;
   background-color: transparent !important;
   border-top: 0 !important;
-  border-bottom-color: var(--toolbar-bgcolor) !important; /* lighter top bar border */
+  border-bottom-color: var(--toolbar-background-color) !important; /* lighter top bar border */
 }
 
 /* Keep tabs toolbar within navigator toolbox height */
@@ -60,7 +60,7 @@
   padding: 0 !important;
   opacity: 0;
   border-top-color: transparent !important;
-  background: var(--toolbar-bgcolor) linear-gradient(rgb(32, 32, 32)) center !important;
+  background: var(--toolbar-background-color) linear-gradient(rgb(32, 32, 32)) center !important;
   background-blend-mode: lighten;
   box-shadow: none;
   transition: var(--drop-down-transition) !important;
@@ -72,7 +72,7 @@
   opacity: 0;
   visibility: visible;
   max-height: var(--personal-toolbar-height) !important;
-  background: var(--toolbar-bgcolor) linear-gradient(rgb(64, 64, 64)) center !important;
+  background: var(--toolbar-background-color) linear-gradient(rgb(64, 64, 64)) center !important;
   transition: var(--drop-down-transition) !important;
   transition-property: translate, opacity !important;
 }
@@ -290,13 +290,14 @@ tab-group:not([collapsed]) > tab-split-view-wrapper::after {
   }
 }
 
-/* Tab split view changes */
+/* Tab split view fixes */
 tab-split-view-wrapper {
   align-items: normal !important;
   display: flex !important;
   flex-direction: row !important;
   margin-block: 1px !important;
-  padding-block: 0px !important;
+  padding-block: 1px !important;
+  outline: none !important;
 }
 
 /* Disable tab split view splitter */
@@ -316,21 +317,35 @@ tab-split-view-wrapper {
   }
   
   /* Tab dividers */
+  tab, tab-group, tab-split-view-wrapper, #tabbrowser-arrowscrollbox-periphery {
+    &::before {
+      content: '';
+      position: relative;
+      width: 1px;
+      height: var(--tab-divider-height);
+      margin-block: auto;
+      margin-left: -1px;
+      translate: calc((var(--tab-spacing) - 1px) / -2) 0;
+      opacity: 0;
+      background: color-mix(in srgb, currentColor 25%, transparent);
+    }
+  }
+  
   *:is(tab, tab-group, tab-split-view-wrapper):not([selected], [multiselected], :hover, [aria-hidden], [collapsed], [hasactivetab]) + *:is(tab, tab-group, tab-split-view-wrapper):not([selected], [multiselected], :hover, [aria-hidden], [collapsed], [hasactivetab])::before,
-  #tabbrowser-arrowscrollbox:not([overflowing]) *:is(tab, tab-group):not([selected], [multiselected], :hover, [aria-hidden]) + #tabbrowser-arrowscrollbox-periphery::before {
-    content: '';
-    position: relative;
-    width: 1px;
-    height: var(--tab-divider-height);
-    margin-block: auto;
-    margin-inline: calc(-1 * (var(--tab-spacing) / 2 + 0.5px)) calc(var(--tab-spacing) / 2 - 0.5px);
-    background: color-mix(in srgb, currentColor 25%, transparent);
+  #tabbrowser-arrowscrollbox:not([overflowing]) *:is(tab, tab-group, tab-split-view-wrapper):not([selected], [multiselected], :hover, [aria-hidden], [collapsed], [hasactivetab]) + #tabbrowser-arrowscrollbox-periphery::before {
+    opacity: 1 !important;
+  }
+  
+  tab-group, tab-split-view-wrapper {
+    & tab::before {
+      height: calc(var(--tab-divider-height) - 4px) !important;
+    }
   }
 
   /* Shorter tab spacing */
-  *:is(tab, tab-group, tab-split-view-wrapper):not(tab[aria-hidden]) { padding-inline: 1px !important; }
-  *:is(tab, tab-group, tab-split-view-wrapper):not(tab[aria-hidden]):nth-child(n+2) { padding-left: calc(var(--tab-spacing) / 2) !important; }
-  *:is(tab, tab-group, tab-split-view-wrapper):not(tab[aria-hidden]):nth-last-child(n+2) { padding-right: calc(var(--tab-spacing) / 2) !important; }
+  *:is(tab, tab-group, tab-split-view-wrapper):not(tab[aria-hidden]) { margin-left: calc(var(--tab-spacing) / 2) !important; padding-inline: 0 !important; }
+  *:is(tab, tab-group, tab-split-view-wrapper):not(tab[aria-hidden]):nth-child(n+2) { margin-left: calc(var(--tab-spacing) / 2) !important; }
+  *:is(tab, tab-group, tab-split-view-wrapper):not(tab[aria-hidden]):nth-last-child(n+2) { margin-right: calc(var(--tab-spacing) / 2) !important; }
 }
 
 /* Vertical tab adjustments */
@@ -348,6 +363,11 @@ tab-split-view-wrapper {
       margin-block: 0 !important;
     }
   }
+}
+
+/* Always show tab background on hover in split view */
+tab-split-view-wrapper > .tabbrowser-tab:not([selected]):hover > .tab-stack > .tab-background {
+  background-color: var(--tab-hover-background-color) !important;
 }
 
 
@@ -396,4 +416,15 @@ menupopup {
 
 .browserSidebarContainer .dialogBox {
   margin-top: var(--navigator-toolbox-height) !important;
+}
+
+/* Remove outline on nonfocused split tabs */
+.browserSidebarContainer.split-view-panel:not(.deck-selected) .browserContainer {
+  outline: none !important;
+}
+
+/* Hide tab view splitter */
+#tabbrowser-tabpanels > splitter.split-view-splitter {
+  z-index: -1;
+  opacity: 0;
 }
