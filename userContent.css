@@ -61,6 +61,20 @@
         column-gap: var(--space-large) !important;
     }
 
+    /* Top sites on the bottom, each row centered */
+    .top-sites-list {
+        display: flex !important;
+        width: calc(var(--top-sites-max-per-row) * (75px + var(--space-large))) !important;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    @media (max-width: 723px) {
+        .top-sites-list {
+            --top-sites-max-per-row: 6 !important;
+        }
+    }
+
     .top-site-outer .context-menu {
         inset: initial !important;
         inset-inline-start: calc(var(--col-width) - var(--space-xxsmall) - 24px) !important;
@@ -74,7 +88,7 @@
         position: fixed;
         height: 100vh;
         width: 100vw;
-        background: black;
+        background: radial-gradient(transparent 50%, black 100%);
         opacity: 0.25;
     }
     
