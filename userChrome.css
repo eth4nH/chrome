@@ -29,6 +29,7 @@
   background-color: transparent !important;
   border-top: 0 !important;
   border-bottom-color: var(--toolbar-background-color) !important; /* lighter top bar border */
+  overflow: visible !important;
 }
 
 /* Keep tabs toolbar within navigator toolbox height */
