@@ -183,6 +183,7 @@
 /* Fit urlbar into shorter navbar */
 #urlbar {
   --urlbar-height: var(--urlbar-container-height) !important;
+  --urlbar-focused-offset: 160px;
 
   position: relative !important;
   transition: translate var(--animation-easing-function) 150ms, /* match urlbar-grow animation */
@@ -214,7 +215,7 @@
   margin-left: calc(-1 * var(--urlbar-margin-inline)) !important;
   width: var(--urlbar-focused-width) !important;
   inset-inline-start: calc((100vw - var(--urlbar-focused-width)) / 2) !important;
-  translate: 0 160px !important;
+  translate: 0 var(--urlbar-focused-offset) !important;
   top: 0 !important;
   transition-delay: 0s !important;
   filter: drop-shadow(0 5px 20px black) drop-shadow(0 5px 20px white);
@@ -223,6 +224,10 @@
   > .urlbar-input-container {
     padding-block: 8px !important;
     padding-inline: calc(var(--urlbar-margin-inline) + var(--urlbar-container-padding)) !important;
+  }
+  
+  > .urlbarView {
+    translate: inherit;
   }
 }
 
