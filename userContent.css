@@ -48,6 +48,7 @@
     /* Wider gap between top site buttons */
     .top-sites-list {
         column-gap: var(--space-large) !important;
+        --newtab-background-card: var(--newtab-background-color-secondary) !important;
     }
 
     /* Top sites on the bottom, each row centered */
@@ -62,6 +63,15 @@
         .top-sites-list {
             --top-sites-max-per-row: 6 !important;
         }
+    }
+    
+    /* Top sites translucent background */
+    .top-sites-list .top-site-button .tile {
+        background: color-mix(in srgb, var(--newtab-background-card) 80%, transparent) !important;
+    }
+    
+    .top-sites-list .top-site-inner:hover .tile {
+        background: var(--newtab-background-card) !important;
     }
 
     .top-site-outer .context-menu {
@@ -81,19 +91,27 @@
         opacity: 0.25;
     }
     
+    /* Weather widget translucent background */
     .weather-widget {
         height: min-content !important;
+        background-color: color-mix(in srgb, var(--newtab-background-color-secondary) 80%, transparent) !important;
     }
     
+    .weather-widget:hover {
+        background-color: var(--newtab-background-color-secondary) !important;
+    }
+    
+    /* Better spacing in weather widget */
     .weather-widget > .widget-title-bar {
         padding-bottom: var(--space-small);
     }
     
     .weather-widget > .forecast-footer {
-        height: min-content;
+        height: 1rem;
         transition: margin 200ms, height 200ms;
     }
     
+    /* Hide sponsor label until hover */
     .weather-widget:not(:hover) > .forecast-footer {
         height: 0;
         margin-block-start: 0 !important;
@@ -105,7 +123,23 @@
     .search-handoff-button,
     .personalize-button {
         backdrop-filter: blur(5px);
-        transition: background 200ms;
+    }
+    
+    .weather-widget {
+        transition-property: height, background !important;
+    }
+    
+    .search-handoff-button {
+        transition-property: background !important;
+        transition-duration: 200ms;
+    }
+    
+    .top-site-outer .tile {
+        transition-property: height, width, background !important;
+    }
+    
+    #main-button > .button-background {
+        transition-property: max-width, padding, background !important;
     }
     
     /* Search bar solid / transparent background */
