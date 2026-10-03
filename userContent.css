@@ -148,7 +148,7 @@
     }
 }
 
-@-moz-document url-prefix("file:///") {
+@-moz-document regexp(".*\.pdf") {
     #scaleSelectContainer.dropdownToolbarButton {
         height: 100%;
     }
