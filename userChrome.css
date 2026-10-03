@@ -405,19 +405,26 @@ tab-split-view-wrapper > .tabbrowser-tab:not([selected]):hover > .tab-stack > .t
   }
 } */
 
-
-/* Smaller right click context menu padding */
+/* Slightly tighter menu popup spacing */
 menupopup {
-  --menuitem-padding: 4px 8px !important;
-    
-  menuseparator {
-    padding: var(--menuitem-padding) !important;
-  }
+  --menuitem-padding-block: 0.4rem !important;
+  --menuitem-padding-inline: 1rem !important;
+  --panel-menuitem-padding: var(--menuitem-padding-block) var(--menuitem-padding-inline) !important;
 }
 
 /* Same as above for context menu nav buttons */
 #context-navigation > .menuitem-iconic > .menu-icon {
-  padding: var(--menuitem-padding) !important;
+  padding-block: var(--menuitem-padding-block) !important;
+}
+
+/* Move menu arrow to right a bit */
+menupopup > menu::after {
+  margin-inline: 0.5rem -0.5rem !important;
+}
+
+/* Better looking border radius on some panels (wtf Mozilla) */
+.cui-widget-panel, .toolbar-menupopup, .panel-no-padding {
+  --panel-border-radius: var(--border-radius-large) !important;
 }
 
 .browserSidebarContainer .dialogBox {

@@ -147,3 +147,9 @@
         --content-search-handoff-ui-background-color: color-mix(in srgb, var(--newtab-background-color-secondary) 80%, transparent) !important;
     }
 }
+
+@-moz-document url-prefix("file:///") {
+    #scaleSelectContainer.dropdownToolbarButton {
+        height: 100%;
+    }
+}
