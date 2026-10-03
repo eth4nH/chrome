@@ -423,7 +423,7 @@ menupopup > menu::after {
 }
 
 /* Better looking border radius on some panels (wtf Mozilla) */
-.cui-widget-panel, .toolbar-menupopup, .panel-no-padding {
+:root[uidensity='compact'] .cui-widget-panel, .toolbar-menupopup, .panel-no-padding {
   --panel-border-radius: var(--border-radius-large) !important;
 }
 

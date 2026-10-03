@@ -149,7 +149,13 @@
 }
 
 @-moz-document regexp(".*\.pdf") {
-    #scaleSelectContainer.dropdownToolbarButton {
+    :root[data-toolbar-density='compact'] {
+        /* Larger icons */
+        --toolbar-vertical-padding: 2px !important;
+    }
+
+    /* Fix zoom selector height */
+    :root[data-toolbar-density='compact'] #scaleSelectContainer.dropdownToolbarButton {
         height: 100%;
     }
 }
